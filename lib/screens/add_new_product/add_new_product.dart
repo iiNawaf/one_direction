@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:project/widgets/add_new_product/add_product_category.dart';
 import 'package:project/widgets/add_new_product/add_product_expire_date.dart';
 import 'package:project/widgets/add_new_product/add_product_inital_date.dart';
 import 'package:project/widgets/add_new_product/add_product_link.dart';
@@ -28,6 +29,8 @@ class AddNewProductScreen extends StatelessWidget {
               child: Form(
                 child: Column(
                     children: <Widget>[
+                      AddProductCategory(),
+                      Container(height: 20),
                       AddProductName(),
                       Container(height: 20),
                       AddProductPrice(),
