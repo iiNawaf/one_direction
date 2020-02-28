@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 
-class SignUpCompanyPassword extends StatelessWidget {
+class SignUpCompanyNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: Colors.grey,
-      obscureText: true,
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
-          icon: Icon(Icons.person, color: Colors.blue[200]),
-          hintText: 'كلمة المرور',
+          icon: Icon(Icons.phone, color: Colors.blue[200]),
+          hintText: 'رقم الهاتف',
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Colors.blue[200]

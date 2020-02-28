@@ -45,12 +45,30 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.update),
+            title: Text('ترقية إلى حساب شركة'),
+            onTap: () {
+              route == '/upgradeToCompanyAccount'
+                  ? Navigator.pop(context)
+                  : Navigator.pushNamed(context, '/upgradeToCompanyAccount');
+            },
+          ),
+          ListTile(
             leading: Icon(Icons.add),
             title: Text('إضافة منتج'),
             onTap: () {
               route == '/addNewProduct'
                   ? Navigator.pop(context)
                   : Navigator.pushNamed(context, '/addNewProduct');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.add),
+            title: Text('إضافة عرض'),
+            onTap: () {
+              route == '/addNewOffer'
+                  ? Navigator.pop(context)
+                  : Navigator.pushNamed(context, '/addNewOffer');
             },
           ),
           Divider(),

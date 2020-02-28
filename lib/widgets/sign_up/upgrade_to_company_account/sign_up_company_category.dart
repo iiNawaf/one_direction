@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 
-class SignUpCity extends StatefulWidget {
+class SignUpCompanyCategory extends StatefulWidget {
   @override
-  _SignUpCityState createState() => _SignUpCityState();
+  _SignUpCompanyCategoryState createState() => _SignUpCompanyCategoryState();
 }
 
-class _SignUpCityState extends State<SignUpCity> {
-  String dropdownValue = 'One';
+class _SignUpCompanyCategoryState extends State<SignUpCompanyCategory> {
+  String companyCategoryValue = 'اختر';
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Icon(Icons.location_on, color: Colors.blue[200]),
+        Icon(Icons.more_horiz, color: Colors.blue[200]),
         Expanded(
           child: Container(
             padding: EdgeInsets.only(right: 15),
@@ -21,7 +21,7 @@ class _SignUpCityState extends State<SignUpCity> {
             child: DropdownButton<String>(
               isExpanded: true,
               icon: Icon(Icons.keyboard_arrow_down),
-              value: dropdownValue,
+              value: companyCategoryValue,
               iconSize: 24,
               style: TextStyle(
                   color: Colors.black
@@ -32,10 +32,10 @@ class _SignUpCityState extends State<SignUpCity> {
               ),
               onChanged: (String newValue) {
                 setState(() {
-                  dropdownValue = newValue;
+                  companyCategoryValue = newValue;
                 });
               },
-              items: <String>['One', 'Two', 'Free', 'Four']
+              items: <String>['اختر', 'مطعم', 'كافيه', 'إلكترونيات', 'أسواق']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,

@@ -8,7 +8,7 @@ class AddProductLink extends StatelessWidget {
       cursorColor: Colors.grey,
       decoration: InputDecoration(
           icon: Icon(Icons.link, color: Colors.blue[200]),
-          hintText: 'رابط العرض',
+          hintText: 'رابط الصورة',
           focusedBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                   color: Colors.blue[200]
