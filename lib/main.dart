@@ -4,6 +4,8 @@ import 'package:project/app_manager/app_manager.dart';
 import 'package:project/screens/add_new_offer/add_new_offer.dart';
 import 'package:project/screens/add_new_product/add_new_product.dart';
 import 'package:project/screens/login/login.dart';
+import 'package:project/screens/my_offers/add_product_offers.dart';
+import 'package:project/screens/my_offers/my_offers.dart';
 import 'package:project/screens/offer_preview/offer_preview.dart';
 import 'package:project/screens/sign_up/sign_up.dart';
 import 'package:project/screens/sign_up/upgrade_to_company_account.dart';
@@ -34,7 +36,9 @@ class MyApp extends StatelessWidget {
         '/addNewProduct' : (context) => AddNewProductScreen(),
         '/suggestions' : (context) => SuggestionScreen(),
         '/addNewOffer' : (context) => AddNewOfferScreen(),
-        '/upgradeToCompanyAccount' : (context) => UpgradeToCompanyAccount()
+        '/upgradeToCompanyAccount' : (context) => UpgradeToCompanyAccount(),
+        '/myOffers' : (context) => MyOffersScreen(),
+        '/addProductOffers' : (context) => AddProductOffersScreen(),
       },
     );
   }

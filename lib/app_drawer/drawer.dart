@@ -54,7 +54,7 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.add),
+            leading: Icon(Icons.add_circle),
             title: Text('إضافة منتج'),
             onTap: () {
               route == '/addNewProduct'
@@ -69,6 +69,15 @@ class AppDrawer extends StatelessWidget {
               route == '/addNewOffer'
                   ? Navigator.pop(context)
                   : Navigator.pushNamed(context, '/addNewOffer');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.local_offer),
+            title: Text('عروضي'),
+            onTap: () {
+              route == '/myOffers'
+                  ? Navigator.pop(context)
+                  : Navigator.pushNamed(context, '/myOffers');
             },
           ),
           Divider(),
