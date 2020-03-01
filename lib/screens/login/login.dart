@@ -7,10 +7,12 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Color(0xffe8f0f2),
       body: ListView(
         shrinkWrap: true,
@@ -43,17 +45,13 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: SubmitLogin(formKey: formKey, usernameController: usernameController, passwordController: passwordController),
-                      ),
-                      Expanded(
-                        child: FlatButton(
-                          child: Text(
-                            'نسيت كلمة المرور؟',
-                            style: TextStyle(color: Colors.blue[300]),
-                          ),
-                          onPressed: () {},
+                        child: SubmitLogin(
+                          formKey: formKey,
+                          scaffoldKey: scaffoldKey,
+                          usernameController: usernameController,
+                          passwordController: passwordController,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ],

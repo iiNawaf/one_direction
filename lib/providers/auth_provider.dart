@@ -25,7 +25,7 @@ class AuthProvider extends ChangeNotifier {
 
     final extractedResponse = json.decode(response.body);
     if (extractedResponse['error'] != null) {
-      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+      throw Exception(extractedResponse['error']);
     }
   }
 
@@ -44,7 +44,7 @@ class AuthProvider extends ChangeNotifier {
 
     final extractedResponse = json.decode(response.body);
     if (extractedResponse['error'] != null) {
-      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+      throw Exception(extractedResponse['error']);
     } else {
       final foundUser = extractedResponse['user'];
       loggedinUser = User(

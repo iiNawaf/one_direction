@@ -6,8 +6,9 @@ class SubmitLogin extends StatefulWidget {
   final TextEditingController usernameController;
   final TextEditingController passwordController;
   final GlobalKey<FormState> formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
 
-  SubmitLogin({@required this.formKey, @required this.usernameController, @required this.passwordController});
+  SubmitLogin({@required this.formKey, @required this.scaffoldKey, @required this.usernameController, @required this.passwordController});
 
   @override
   _SubmitLoginState createState() => _SubmitLoginState();
@@ -15,6 +16,12 @@ class SubmitLogin extends StatefulWidget {
 
 class _SubmitLoginState extends State<SubmitLogin> {
   bool isLaoding = false;
+
+  void _showMessage(String message) {
+    widget.scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  }
 
   void _submit() async {
     if (widget.formKey.currentState.validate()) {
@@ -31,6 +38,10 @@ class _SubmitLoginState extends State<SubmitLogin> {
         setState(() {
           isLaoding = false;
         });
+        final error = e.toString().split(" ")[1];
+        if (error == "NOT_FOUND") {
+          _showMessage("الاسم او كلمة المرور غير صحيحة");
+        }
       }
     }
   }

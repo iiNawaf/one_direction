@@ -9,10 +9,12 @@ class SignUpScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordComfirmController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Color(0xffe8f0f2),
       body: ListView(shrinkWrap: true, children: <Widget>[
         Row(
@@ -41,7 +43,7 @@ class SignUpScreen extends StatelessWidget {
               Container(height: 20),
               SignUpConfirmPassword(controller: passwordComfirmController, passwordController: passwordController),
               Container(height: 20),
-              SubmitSignUp(formKey: formKey, usernameController: usernameController, passwordController: passwordController),
+              SubmitSignUp(formKey: formKey, scaffoldKey: scaffoldKey, usernameController: usernameController, passwordController: passwordController),
             ]),
           ),
         )

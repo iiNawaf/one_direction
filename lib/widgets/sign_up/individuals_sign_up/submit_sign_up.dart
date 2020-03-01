@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 
 class SubmitSignUp extends StatefulWidget {
   final GlobalKey<FormState> formKey;
+  final GlobalKey<ScaffoldState> scaffoldKey;
   final TextEditingController usernameController;
   final TextEditingController passwordController;
 
-  SubmitSignUp({@required this.formKey, @required this.usernameController, @required this.passwordController});
+  SubmitSignUp({@required this.formKey, @required this.scaffoldKey, @required this.usernameController, @required this.passwordController});
 
   @override
   _SubmitSignUpState createState() => _SubmitSignUpState();
@@ -15,6 +16,12 @@ class SubmitSignUp extends StatefulWidget {
 
 class _SubmitSignUpState extends State<SubmitSignUp> {
   bool isLoading = false;
+
+  void _showMessage(String message) {
+    widget.scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  }
 
   void _submit() async {
     if (widget.formKey.currentState.validate()) {
@@ -30,7 +37,12 @@ class _SubmitSignUpState extends State<SubmitSignUp> {
         setState(() {
           isLoading = false;
         });
-        print(e);
+        final error = e.toString().split(" ")[1];
+        if (error == "ACCOUNT_EXIST") {
+          _showMessage("الحساب موجود مسبقاً");
+        } else if (error == "USER_CREATION_FAILED") {
+          _showMessage("حدث خطأ ما, لم نتمكن من إكمال طلبك");
+        }
       }
     } else {
       return;
