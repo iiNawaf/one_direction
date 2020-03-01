@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:project/models/user_model.dart';
+import 'package:project/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+    final loggedinUser = authProvider.loggedinUser;
     var route = ModalRoute.of(context).settings.name;
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -14,87 +19,104 @@ class AppDrawer extends StatelessWidget {
               color: Colors.blue[200],
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.white,
-                  backgroundImage: AssetImage('./assets/apple.png'),
-                ),
-                Text('Company name')
+                loggedinUser == null
+                    ? Container()
+                    : loggedinUser.accountType == AccountType.Individual
+                        ? Container()
+                        : CircleAvatar(
+                            radius: 40,
+                            backgroundColor: Colors.white,
+                            backgroundImage: AssetImage('./assets/apple.png'),
+                          ),
+                loggedinUser == null ? Center(child: Text("مرحبا بك في One Direction")) : Text("اهلاً بك ${loggedinUser.username}")
               ],
             ),
           ),
-
-
           ListTile(
             leading: Icon(Icons.home),
             title: Text('الرئيسية'),
             onTap: () {
-              route == '/'
-                  ? Navigator.pop(context)
-                  : Navigator.pushNamed(context, '/');
+              route == '/' ? Navigator.pop(context) : Navigator.pushNamed(context, '/');
             },
           ),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text('تسجيل الدخول'),
-            onTap: () {
-              route == '/login'
-                  ? Navigator.pop(context)
-                  : Navigator.pushNamed(context, '/login');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.update),
-            title: Text('ترقية إلى حساب شركة'),
-            onTap: () {
-              route == '/upgradeToCompanyAccount'
-                  ? Navigator.pop(context)
-                  : Navigator.pushNamed(context, '/upgradeToCompanyAccount');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.add_circle),
-            title: Text('إضافة منتج'),
-            onTap: () {
-              route == '/addNewProduct'
-                  ? Navigator.pop(context)
-                  : Navigator.pushNamed(context, '/addNewProduct');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.add),
-            title: Text('إضافة عرض'),
-            onTap: () {
-              route == '/addNewOffer'
-                  ? Navigator.pop(context)
-                  : Navigator.pushNamed(context, '/addNewOffer');
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.local_offer),
-            title: Text('عروضي'),
-            onTap: () {
-              route == '/myOffers'
-                  ? Navigator.pop(context)
-                  : Navigator.pushNamed(context, '/myOffers');
-            },
-          ),
+          loggedinUser != null
+              ? Container()
+              : ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text('تسجيل الدخول'),
+                  onTap: () {
+                    route == '/login' ? Navigator.pop(context) : Navigator.pushNamed(context, '/login');
+                  },
+                ),
+          loggedinUser == null
+              ? Container()
+              : loggedinUser.accountType == AccountType.Company
+                  ? Container()
+                  : ListTile(
+                      leading: Icon(Icons.update),
+                      title: Text('ترقية إلى حساب شركة'),
+                      onTap: () {
+                        route == '/upgradeToCompanyAccount' ? Navigator.pop(context) : Navigator.pushNamed(context, '/upgradeToCompanyAccount');
+                      },
+                    ),
+          loggedinUser == null
+              ? Container()
+              : loggedinUser.accountType == AccountType.Individual
+                  ? Container()
+                  : ListTile(
+                      leading: Icon(Icons.add_circle),
+                      title: Text('إضافة منتج'),
+                      onTap: () {
+                        route == '/addNewProduct' ? Navigator.pop(context) : Navigator.pushNamed(context, '/addNewProduct');
+                      },
+                    ),
+          loggedinUser == null
+              ? Container()
+              : loggedinUser.accountType == AccountType.Individual
+                  ? Container()
+                  : ListTile(
+                      leading: Icon(Icons.add),
+                      title: Text('إضافة عرض'),
+                      onTap: () {
+                        route == '/addNewOffer' ? Navigator.pop(context) : Navigator.pushNamed(context, '/addNewOffer');
+                      },
+                    ),
+          loggedinUser == null
+              ? Container()
+              : loggedinUser.accountType == AccountType.Individual
+                  ? Container()
+                  : ListTile(
+                      leading: Icon(Icons.local_offer),
+                      title: Text('عروضي'),
+                      onTap: () {
+                        route == '/myOffers' ? Navigator.pop(context) : Navigator.pushNamed(context, '/myOffers');
+                      },
+                    ),
           Divider(),
           ListTile(
             leading: Icon(Icons.star),
             title: Text('قيمنا'),
-            onTap: (){
-
-            },
+            onTap: () {},
           ),
           ListTile(
             leading: Icon(Icons.info_outline),
             title: Text('اقتراح'),
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, '/suggestions');
             },
           ),
+          loggedinUser == null
+              ? Container()
+              : ListTile(
+                  leading: Icon(Icons.exit_to_app),
+                  title: Text('خروج'),
+                  onTap: () async {
+                    await authProvider.signout();
+                    Navigator.of(context).pop();
+                  },
+                ),
         ],
       ),
     );
