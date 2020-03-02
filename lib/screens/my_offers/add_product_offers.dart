@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/screens/my_offers/submit_product_offer.dart';
-import 'package:project/widgets/my_offers/offers_percent.dart';
+import 'package:project/widgets/my_offers/choose_offers_percent.dart';
 import 'package:project/widgets/my_offers/products_list.dart';
 
 
@@ -15,7 +15,7 @@ class AddProductOffersScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          OffersPercent(),
+          ChooseOfferPercent(),
           ListView(
             shrinkWrap: true,
             children: <Widget>[

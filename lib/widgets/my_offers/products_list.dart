@@ -7,26 +7,14 @@ class ProductsList extends StatefulWidget {
 }
 
 class _ProductsListState extends State<ProductsList> {
-  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: (){
-        setState(() {
-          isChecked = !isChecked;
-        });
+
       },
       leading: CircleAvatar(),
       title: Text('Product'),
-      trailing: Checkbox(
-        activeColor: Colors.blue[200],
-          value: isChecked,
-          onChanged: (value){
-            setState(() {
-              isChecked = !isChecked;
-            });
-          }
-      ),
     );
   }
 }
