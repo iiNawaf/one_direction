@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
-
 class SignUpCompanyCategory extends StatefulWidget {
+  static String companyCategoryValue = 'اختر';
   @override
   _SignUpCompanyCategoryState createState() => _SignUpCompanyCategoryState();
 }
 
 class _SignUpCompanyCategoryState extends State<SignUpCompanyCategory> {
-  String companyCategoryValue = 'اختر';
+  @override
+  void dispose() {
+    SignUpCompanyCategory.companyCategoryValue = 'اختر';
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +25,26 @@ class _SignUpCompanyCategoryState extends State<SignUpCompanyCategory> {
             child: DropdownButton<String>(
               isExpanded: true,
               icon: Icon(Icons.keyboard_arrow_down),
-              value: companyCategoryValue,
+              value: SignUpCompanyCategory.companyCategoryValue,
               iconSize: 24,
-              style: TextStyle(
-                  color: Colors.black
-              ),
+              style: TextStyle(color: Colors.black),
               underline: Container(
                 height: 1,
                 color: Colors.grey,
               ),
               onChanged: (String newValue) {
                 setState(() {
-                  companyCategoryValue = newValue;
+                  SignUpCompanyCategory.companyCategoryValue = newValue;
                 });
               },
-              items: <String>['اختر', 'مطعم', 'كافيه', 'إلكترونيات', 'أسواق']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              })
-                  .toList(),
+              items: <String>['اختر', 'مطعم', 'كافيه', 'إلكترونيات', 'أسواق'].map<DropdownMenuItem<String>>(
+                (String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                },
+              ).toList(),
             ),
           ),
         ),

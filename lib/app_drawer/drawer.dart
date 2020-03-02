@@ -28,9 +28,13 @@ class AppDrawer extends StatelessWidget {
                         : CircleAvatar(
                             radius: 40,
                             backgroundColor: Colors.white,
-                            backgroundImage: AssetImage('./assets/apple.png'),
+                            backgroundImage: NetworkImage(authProvider.userComapny.logoUrl),
                           ),
-                loggedinUser == null ? Center(child: Text("مرحبا بك في One Direction")) : Text("اهلاً بك ${loggedinUser.username}")
+                loggedinUser == null
+                    ? Center(child: Text("مرحبا بك في One Direction"))
+                    : authProvider.userComapny == null
+                        ? Text("اهلاً بك ${loggedinUser.username}")
+                        : Text("اهلاً بك ${authProvider.userComapny.arName}")
               ],
             ),
           ),
