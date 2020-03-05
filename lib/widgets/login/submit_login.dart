@@ -31,9 +31,6 @@ class _SubmitLoginState extends State<SubmitLogin> {
         });
         await Provider.of<AuthProvider>(context, listen: false).login(widget.usernameController.text, widget.passwordController.text);
         Navigator.pushReplacementNamed(context, "/home");
-        setState(() {
-          isLaoding = false;
-        });
       } catch (e) {
         setState(() {
           isLaoding = false;

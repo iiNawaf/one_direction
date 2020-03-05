@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class AddProductName extends StatelessWidget {
+class AddProductEnName extends StatelessWidget {
   final TextEditingController controller;
 
-  AddProductName({@required this.controller});
+  AddProductEnName({@required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class AddProductName extends StatelessWidget {
       cursorColor: Colors.grey,
       decoration: InputDecoration(
         icon: Icon(Icons.local_offer, color: Colors.blue[200]),
-        hintText: 'اسم المنتج بالعربي',
+        hintText: 'اسم المنتج بالانجليزي',
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.blue[200]),
         ),
