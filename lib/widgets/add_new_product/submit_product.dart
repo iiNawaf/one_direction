@@ -52,7 +52,9 @@ class _SubmitProductState extends State<SubmitProduct> {
           isLoading = true;
         });
         final companyData = Provider.of<AuthProvider>(context, listen: false).userComapny;
+        final comapnyId = companyData.companyId;
         final newProduct = Product(
+          companyId: comapnyId,
           arName: widget.arNameController.text,
           enName: widget.enNameController.text,
           category: companyData.category,
@@ -60,8 +62,7 @@ class _SubmitProductState extends State<SubmitProduct> {
           price: double.parse(widget.priceController.text),
           productId: null,
         );
-        final comapnyId = companyData.companyId;
-        await Provider.of<ProductsProvider>(context, listen: false).insert(comapnyId, newProduct);
+        await Provider.of<ProductsProvider>(context, listen: false).insert(newProduct);
         setState(() {
           isLoading = false;
         });

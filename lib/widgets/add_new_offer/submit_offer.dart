@@ -45,6 +45,7 @@ class _SubmitOfferState extends State<SubmitOffer> {
           setState(() {
             isLoading = true;
           });
+          final comapnyId = Provider.of<AuthProvider>(context, listen: false).userComapny.companyId;
           final newoffer = Offer(
             offerId: null,
             discount: double.parse(widget.discountController.text),
@@ -52,9 +53,11 @@ class _SubmitOfferState extends State<SubmitOffer> {
             keyword: widget.keywordController.text,
             startDate: AddProductInitialDate.startDate,
             endDate: AddProductExpireDate.endDate,
+            companyId: comapnyId,
+            noProducts: 0,
           );
-          final comapnyId = Provider.of<AuthProvider>(context, listen: false).userComapny.companyId;
-          await Provider.of<OffersProvider>(context, listen: false).insert(comapnyId, newoffer);
+
+          await Provider.of<OffersProvider>(context, listen: false).insert(newoffer);
           setState(() {
             isLoading = false;
           });

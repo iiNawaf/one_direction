@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 
 class Offer {
   final int offerId;
+  final int companyId;
   double discount;
+  int noProducts;
   String imageUrl;
   String keyword;
   DateTime startDate;
@@ -10,6 +12,8 @@ class Offer {
 
   Offer({
     @required this.discount,
+    @required this.noProducts,
+    @required this.companyId,
     @required this.endDate,
     @required this.imageUrl,
     @required this.keyword,

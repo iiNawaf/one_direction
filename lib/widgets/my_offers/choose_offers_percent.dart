@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:project/models/offer_model.dart';
 
 class ChooseOfferPercent extends StatefulWidget {
-  static String chooseOffer = 'اختر العرض';
+  static int chosenOfferId;
+  final List<Offer> offersList;
+
+  ChooseOfferPercent({@required this.offersList});
+
   @override
   _ChooseOfferPercentState createState() => _ChooseOfferPercentState();
 }
 
 class _ChooseOfferPercentState extends State<ChooseOfferPercent> {
+  @override
+  void initState() {
+    ChooseOfferPercent.chosenOfferId = widget.offersList[0].offerId;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,7 +26,7 @@ class _ChooseOfferPercentState extends State<ChooseOfferPercent> {
       child: DropdownButton<String>(
         isExpanded: true,
         icon: Icon(Icons.keyboard_arrow_down),
-        value: ChooseOfferPercent.chooseOffer,
+        value: widget.offersList.firstWhere((element) => element.offerId == ChooseOfferPercent.chosenOfferId).discount.toString(),
         iconSize: 24,
         style: TextStyle(color: Colors.black),
         underline: Container(
@@ -24,14 +35,15 @@ class _ChooseOfferPercentState extends State<ChooseOfferPercent> {
         ),
         onChanged: (String newValue) {
           setState(() {
-            ChooseOfferPercent.chooseOffer = newValue;
+            ChooseOfferPercent.chosenOfferId =
+                widget.offersList.firstWhere((element) => element.discount.toString() == newValue.split("%")[0]).offerId;
           });
         },
-        items: <String>['اختر العرض', '1%', '2%', '3%', '4%'].map<DropdownMenuItem<String>>(
-              (String value) {
+        items: widget.offersList.map<DropdownMenuItem<String>>(
+          (Offer value) {
             return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
+              value: value.discount.toString(),
+              child: Text(value.discount.toString() + "%"),
             );
           },
         ).toList(),
