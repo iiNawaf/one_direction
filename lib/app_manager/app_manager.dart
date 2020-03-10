@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:project/app_drawer/drawer.dart';
+import 'package:project/providers/discount_provider.dart';
 import 'package:project/screens/home/home.dart';
 import 'package:project/screens/offers_list/offers_list.dart';
 import 'package:project/widgets/search/search_bar.dart';
 import 'package:project/widgets/search/search_filter.dart';
+import 'package:provider/provider.dart';
 
-class AppManager extends StatelessWidget {
+class AppManager extends StatefulWidget {
+  @override
+  _AppManagerState createState() => _AppManagerState();
+}
+
+class _AppManagerState extends State<AppManager> {
   final style = TextStyle(fontSize: 13);
+  bool isLoading = false;
+  bool isInit = true;
+
+  @override
+  void didChangeDependencies() async {
+    if (isInit) {
+      try {
+        isInit = false;
+        final discountProvider = Provider.of<DiscountProvider>(context, listen: false);
+        await discountProvider.loadDiscountedOffers();
+      } catch (e) {
+        print(e);
+      }
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,29 +47,23 @@ class AppManager extends StatelessWidget {
                     Expanded(
                       child: Container(
                           height: 30.0,
-                          padding: EdgeInsets.only(right:10.0, left: 10.0),
+                          padding: EdgeInsets.only(right: 10.0, left: 10.0),
                           color: Colors.white,
                           child: Form(
                             child: Row(
-                              children: <Widget>[
-                                SearchBar(),
-                                Icon(Icons.search, color: Colors.black, size:20)
-                              ],
+                              children: <Widget>[SearchBar(), Icon(Icons.search, color: Colors.black, size: 20)],
                             ),
-                          )
-                      ),
+                          )),
                     ),
                     IconButton(
                         icon: Icon(Icons.filter_list),
-                        onPressed: (){
+                        onPressed: () {
                           showModalBottomSheet(
                               context: context,
-                              builder: (BuildContext context){
+                              builder: (BuildContext context) {
                                 return SearchFilter();
-                              }
-                          );
-                        }
-                    )
+                              });
+                        })
                   ],
                 ),
                 bottom: TabBar(
@@ -57,7 +75,6 @@ class AppManager extends StatelessWidget {
                     Tab(child: Text('كافيهات', style: style)),
                     Tab(child: Text('إلكترونيات', style: style)),
                     Tab(child: Text('أسواق', style: style)),
-
                   ],
                 ),
               ),
@@ -73,7 +90,6 @@ class AppManager extends StatelessWidget {
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 }

@@ -19,6 +19,12 @@ class _ChooseOfferPercentState extends State<ChooseOfferPercent> {
   }
 
   @override
+  void dispose() {
+    ChooseOfferPercent.chosenOfferId = widget.offersList[0].offerId;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(15),

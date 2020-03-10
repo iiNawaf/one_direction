@@ -12,6 +12,7 @@ class AuthProvider extends ChangeNotifier {
   User loggedinUser;
   Company userComapny;
 
+  //** SIGNUP **/
   Future<void> signup(String username, String password) async {
     final url = domain + "signup";
     final response = await http.post(
@@ -31,6 +32,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  //** LOGIN **/
   Future<void> login(String username, String password) async {
     final url = domain + "login";
     final response = await http.post(
@@ -95,10 +97,10 @@ class AuthProvider extends ChangeNotifier {
         final localStorage = await SharedPreferences.getInstance();
         localStorage.setString("userDataWithCompany", localUserData);
       }
-      notifyListeners();
     }
   }
 
+  //** AUTO LOGIN **/
   Future<void> autoLogin() async {
     try {
       final localStorage = await SharedPreferences.getInstance();
@@ -136,11 +138,12 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  //** SIGNOUT **/
   Future<void> signout() async {
     final localStorage = await SharedPreferences.getInstance();
     localStorage.clear();
     loggedinUser = null;
-    notifyListeners();
+    userComapny = null;
   }
 
   Future<void> upgradeToCompany(int accountId, Company companyInfo) async {

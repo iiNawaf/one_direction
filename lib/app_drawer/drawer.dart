@@ -59,7 +59,7 @@ class AppDrawer extends StatelessWidget {
               : loggedinUser.accountType == AccountType.Company
                   ? Container()
                   : ListTile(
-                      leading: Icon(Icons.update),
+                      leading: Icon(Icons.business),
                       title: Text('ترقية إلى حساب شركة'),
                       onTap: () {
                         route == '/upgradeToCompanyAccount' ? Navigator.pop(context) : Navigator.pushNamed(context, '/upgradeToCompanyAccount');
@@ -93,7 +93,7 @@ class AppDrawer extends StatelessWidget {
                   ? Container()
                   : ListTile(
                       leading: Icon(Icons.local_offer),
-                      title: Text('عروضي'),
+                      title: Text('الخصومات'),
                       onTap: () {
                         route == '/myOffers' ? Navigator.pop(context) : Navigator.pushNamed(context, '/myOffers');
                       },

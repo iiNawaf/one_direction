@@ -30,6 +30,7 @@ class _SubmitSignUpState extends State<SubmitSignUp> {
           isLoading = true;
         });
         await Provider.of<AuthProvider>(context, listen: false).signup(widget.usernameController.text, widget.passwordController.text);
+        Navigator.of(context).pushReplacementNamed("/login");
         setState(() {
           isLoading = false;
         });

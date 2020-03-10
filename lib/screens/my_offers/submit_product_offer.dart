@@ -15,6 +15,21 @@ class SubmitProductOffer extends StatefulWidget {
 class _SubmitProductOfferState extends State<SubmitProductOffer> {
   bool isSummiting = false;
 
+  void _showMessage(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("موافق"),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _submit() async {
     if (widget.offerId != null && widget.productsList.isNotEmpty) {
       try {
@@ -24,10 +39,13 @@ class _SubmitProductOfferState extends State<SubmitProductOffer> {
         await Provider.of<DiscountProvider>(context, listen: false).applyOffer(widget.offerId, widget.productsList);
         Navigator.of(context).pop();
       } catch (e) {
-        print(e);
         setState(() {
           isSummiting = false;
         });
+        final message = e.toString().split(":")[1].split(" ")[1];
+        if (message == "PRODUCT_ALREADY_APPLIED") {
+          _showMessage(context, "بعض المنتجات التي تم اختيارها معروضة مسبقاً");
+        }
       }
     }
   }

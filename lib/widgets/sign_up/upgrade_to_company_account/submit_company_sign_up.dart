@@ -66,6 +66,7 @@ class _SubmitCompanySignUpState extends State<SubmitCompanySignUp> {
                     isLoading = false;
                   });
                 } catch (e) {
+                  print(e);
                   setState(() {
                     isLoading = false;
                   });

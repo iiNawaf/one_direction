@@ -57,7 +57,7 @@ class _AddProductOffersScreenState extends State<AddProductOffersScreen> {
         title: Text('تطبيق العروض على المنتجات'),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? CircularProgressIndicator()
           : offersProvider.companyOffers.isEmpty
               ? Center(child: Text("تأكد من اضافة عروض اولاً"))
               : productstProvider.companyProducts.isEmpty
