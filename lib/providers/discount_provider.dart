@@ -51,8 +51,8 @@ class DiscountProvider extends ChangeNotifier {
           productImageUrl: element['Prod_image'],
           offerImageUrl: element['Offerimages'],
           discount: double.parse(element['discount']),
-          priceAfter: double.parse(element['price_after']),
-          priceBefore: double.parse(element['price_before']),
+          priceAfter: double.parse(double.parse(element['price_after']).toStringAsFixed(2)),
+          priceBefore: double.parse(double.parse(element['price_before']).toStringAsFixed(2)),
           startDate: DateTime.parse(element['StartDate']),
           endDate: DateTime.parse(element['endDate']),
         );
