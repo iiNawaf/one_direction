@@ -60,7 +60,7 @@ class LatestOffers extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.pushNamed(context, '/offerPreview');
+                Navigator.pushNamed(context, '/offerPreview', arguments: discountedProduct);
               },
               child: Container(
                 height: 30.0,
