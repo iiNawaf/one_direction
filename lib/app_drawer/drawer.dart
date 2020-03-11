@@ -99,6 +99,18 @@ class AppDrawer extends StatelessWidget {
                       },
                     ),
           Divider(),
+          loggedinUser == null
+              ? Container()
+              : loggedinUser.accountType == AccountType.Individual
+              ? Container()
+              : ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('إدارة'),
+            onTap: () {
+              route == '/manage' ? Navigator.pop(context) : Navigator.pushNamed(context, '/manage');
+            },
+          ),
+          Divider(),
           ListTile(
             leading: Icon(Icons.star),
             title: Text('قيمنا'),

@@ -4,7 +4,6 @@ import 'package:project/providers/discount_provider.dart';
 import 'package:project/screens/home/home.dart';
 import 'package:project/screens/offers_list/offers_list.dart';
 import 'package:project/widgets/search/search_bar.dart';
-import 'package:project/widgets/search/search_filter.dart';
 import 'package:provider/provider.dart';
 
 class AppManager extends StatefulWidget {
@@ -55,15 +54,6 @@ class _AppManagerState extends State<AppManager> {
                             ),
                           )),
                     ),
-                    IconButton(
-                        icon: Icon(Icons.filter_list),
-                        onPressed: () {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return SearchFilter();
-                              });
-                        })
                   ],
                 ),
                 bottom: TabBar(
