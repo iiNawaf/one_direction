@@ -30,9 +30,11 @@ class LatestOffers extends StatelessWidget {
             Row(
               children: <Widget>[
                 Text(
-                  "ينتهي بعد ${discountedProduct.endDate.difference(discountedProduct.startDate).inDays} يوم/أيام",
+                  discountedProduct.endDate.difference(DateTime.now()).inDays == 0
+                      ? "انتهى العرض"
+                      : "ينتهي بعد ${discountedProduct.endDate.difference(DateTime.now()).inDays} يوم/أيام",
                   style: TextStyle(
-                    color: Colors.yellow[900],
+                    color: discountedProduct.endDate.difference(DateTime.now()).inDays == 0 ? Colors.red : Colors.green,
                   ),
                 ),
               ],

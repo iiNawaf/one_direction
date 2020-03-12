@@ -10,7 +10,7 @@ class OfferPreviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = ModalRoute.of(context).settings.arguments as DiscountedProduct;
-    final days = product.endDate.difference(product.startDate);
+    final days = product.endDate.difference(DateTime.now());
 
     return Scaffold(
       backgroundColor: Color(0xffe8f0f2),
