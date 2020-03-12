@@ -8,6 +8,7 @@ import 'package:project/providers/products_provider.dart';
 import 'package:project/screens/add_new_offer/add_new_offer.dart';
 import 'package:project/screens/add_new_product/add_new_product.dart';
 import 'package:project/screens/login/login.dart';
+import 'package:project/screens/manage_products_and_offers/manage_products_and_offers.dart';
 import 'package:project/screens/my_offers/add_product_offers.dart';
 import 'package:project/screens/my_offers/my_offers.dart';
 import 'package:project/screens/offer_preview/offer_preview.dart';
@@ -15,6 +16,8 @@ import 'package:project/screens/sign_up/sign_up.dart';
 import 'package:project/screens/sign_up/upgrade_to_company_account.dart';
 import 'package:project/screens/splash_screen/splash_screen.dart';
 import 'package:project/screens/suggestion/suggestion.dart';
+import 'package:project/widgets/manage_products_and_offers/manage_offers/edit_offer.dart';
+import 'package:project/widgets/manage_products_and_offers/manage_products/edit_product.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -39,32 +42,46 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<AuthProvider>(
-        builder: (context, authProvider, _) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: [
-            Locale("ar", "AE"),
-          ],
-          locale: Locale("ar", "AE"),
-          home: FutureBuilder(
-            future: authProvider.autoLogin(),
-            builder: (ctx, result) => result.connectionState == ConnectionState.waiting ? SplashScreen() : AppManager(),
-          ),
-          routes: {
-            '/home': (context) => AppManager(),
-            '/login': (context) => LoginScreen(),
-            '/signUp': (context) => SignUpScreen(),
-            '/offerPreview': (context) => OfferPreviewScreen(),
-            '/addNewProduct': (context) => AddNewProductScreen(),
-            '/suggestions': (context) => SuggestionScreen(),
-            '/addNewOffer': (context) => AddNewOfferScreen(),
-            '/upgradeToCompanyAccount': (context) => UpgradeToCompanyAccount(),
-            '/myOffers': (context) => MyOffersScreen(),
-            '/addProductOffers': (context) => AddProductOffersScreen(),
+        builder: (context, authProvider, _) => GestureDetector(
+          onTap: (){
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
           },
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale("ar", "AE"),
+            ],
+            locale: Locale("ar", "AE"),
+            home: FutureBuilder(
+              future: authProvider.autoLogin(),
+              builder: (ctx, result) => result.connectionState == ConnectionState.waiting ? SplashScreen() : AppManager(),
+            ),
+            routes: {
+              '/home': (context) => AppManager(),
+              '/login': (context) => LoginScreen(),
+              '/signUp': (context) => SignUpScreen(),
+              '/offerPreview': (context) => OfferPreviewScreen(),
+              '/addNewProduct': (context) => AddNewProductScreen(),
+              '/suggestions': (context) => SuggestionScreen(),
+              '/addNewOffer': (context) => AddNewOfferScreen(),
+              '/upgradeToCompanyAccount': (context) => UpgradeToCompanyAccount(),
+              '/myOffers': (context) => MyOffersScreen(),
+              '/addProductOffers': (context) => AddProductOffersScreen(),
+              '/manage' : (context) => ManageProductAndOffers(),
+              '/editProduct' : (context) => EditProduct(),
+              '/editOffer' : (context) => EditOffer(),
+            },
+          ),
         ),
       ),
     );
