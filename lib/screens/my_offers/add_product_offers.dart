@@ -62,75 +62,34 @@ class _AddProductOffersScreenState extends State<AddProductOffersScreen> {
               ? Center(child: Text("تأكد من اضافة عروض اولاً"))
               : productstProvider.companyProducts.isEmpty
                   ? Center(child: Text("تأكد من اضافة منتجات اولاً"))
-                  : Row(
+                  : Column(
                       children: <Widget>[
-//                        ChooseOfferPercent(offersList: offersProvider.companyOffers),
-//                        Container(
-//                          child: Text("إختيار المنتجات", style: TextStyle(fontSize: 20)),
-//                          padding: const EdgeInsets.symmetric(vertical: 25),
-//                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Text("إختيار المنتجات", style: TextStyle(fontSize: 17)),
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: companyProducts.length,
-                                itemBuilder: (ctx, index) => ListTile(
-                                  onTap: () {
-                                    setState(() {
-                                      if (isInTheList(companyProducts[index].productId)) {
-                                        productsIds.removeWhere((element) => element == companyProducts[index].productId);
-                                      } else {
-                                        productsIds.add(companyProducts[index].productId);
-                                      }
-                                    });
-                                  },
-                                  leading: CircleAvatar(backgroundImage: NetworkImage(companyProducts[index].imageUrl)),
-                                  title: Text("${companyProducts[index].arName} - ${companyProducts[index].enName}"),
-                                  subtitle: Text(companyProducts[index].price.toString() + "ريال"),
-                                  trailing: isInTheList(companyProducts[index].productId) ? Icon(Icons.check_box) : null,
-                                ),
-                              ),
-                            ],
-                          )
-                        ),
-
+                        ChooseOfferPercent(offersList: offersProvider.companyOffers),
                         Container(
-                          width: 1,
-                          color: Colors.grey,
-                          height: MediaQuery.of(context).size.height,
+                          child: Text("إختيار المنتجات", style: TextStyle(fontSize: 20)),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
 
                         Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: Text("إختيار العروض", style: TextStyle(fontSize: 17)),
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                              ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                  itemCount: offersProvider.companyOffers.length,
-                                  itemBuilder: (BuildContext context, int index){
-                                    return ListTile(
-                                      title: Text('${offersProvider.companyOffers[index].discount}' + '%'),
-                                      trailing: Icon(Icons.check_box),
-                                      onTap: (){
-                                        setState(() {
-
-                                        });
-                                      },
-                                    );
+                          child: ListView.builder(
+                            itemCount: companyProducts.length,
+                            itemBuilder: (ctx, index) => ListTile(
+                              onTap: () {
+                                setState(() {
+                                  if (isInTheList(companyProducts[index].productId)) {
+                                    productsIds.removeWhere((element) => element == companyProducts[index].productId);
+                                  } else {
+                                    productsIds.add(companyProducts[index].productId);
                                   }
-                              ),
-                            ],
-                          )
-                        )
+                                });
+                              },
+                              leading: CircleAvatar(backgroundImage: NetworkImage(companyProducts[index].imageUrl)),
+                              title: Text("${companyProducts[index].arName} - ${companyProducts[index].enName}"),
+                              subtitle: Text(companyProducts[index].price.toString() + "ريال"),
+                              trailing: isInTheList(companyProducts[index].productId) ? Icon(Icons.check_box) : null,
+                            ),
+                          ),
+                        ),
 
                       ],
                     ),
