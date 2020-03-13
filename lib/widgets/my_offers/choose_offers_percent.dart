@@ -24,6 +24,7 @@ class _ChooseOfferPercentState extends State<ChooseOfferPercent> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
