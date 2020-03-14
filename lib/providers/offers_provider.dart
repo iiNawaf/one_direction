@@ -43,6 +43,7 @@ class OffersProvider extends ChangeNotifier {
       throw Exception(extractedResponse['error']);
     } else if (extractedResponse['offers'] != null) {
       final loadedOffers = extractedResponse['offers'] as List<dynamic>;
+      companyOffers.clear();
       loadedOffers.forEach((element) {
         final newOffer = Offer(
           offerId: int.parse(element['Offercode']),

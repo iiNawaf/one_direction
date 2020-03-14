@@ -44,6 +44,7 @@ class ProductsProvider extends ChangeNotifier {
     } else {
       if (extractedResponse['products'] != null) {
         final loadedProducts = extractedResponse['products'] as List<dynamic>;
+        companyProducts.clear();
         loadedProducts.forEach((element) {
           final newProduct = Product(
             productId: int.parse(element['Product_code']),

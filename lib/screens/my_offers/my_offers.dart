@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:project/providers/auth_provider.dart';
+import 'package:project/providers/discount_provider.dart';
+import 'package:provider/provider.dart';
 
 class MyOffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final discountedProvider = Provider.of<DiscountProvider>(context);
+    final companyId = Provider.of<AuthProvider>(context).userComapny.companyId;
+
+    discountedProvider.loadCurrentCompanyDiscountedProducts(companyId);
+    final discountedProductsList = discountedProvider.currentCompanyDiscountedProducts;
+
     return Scaffold(
       backgroundColor: Color(0xffe8f0f2),
       appBar: AppBar(
         backgroundColor: Colors.blue[200],
-        title: Text('العروض'),
+        title: Text('العروض الخاصة بي'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -17,30 +26,28 @@ class MyOffersScreen extends StatelessWidget {
           )
         ],
       ),
-      body: ListView(
+      body: Column(
         children: <Widget>[
-          Card(
-            child: ListTile(
-                leading: Text('50%'),
-                title: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  height: 50,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (ctx, index) => Container(
-                      padding: EdgeInsets.all(5),
-                      height: 50,
-                      width: 50,
-                      child: CircleAvatar(
-                        maxRadius: 50,
-                        backgroundImage: NetworkImage(
-                            "https://cdn.shopify.com/s/files/1/0051/7262/5477/products/1000ml-illuminated-sleeve-2x-new_c44257a2-91c3-4946-b2de-80deb6eb9a14_900x900.png?v=1570045978"),
-                      ),
-                    ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: discountedProductsList.length,
+              itemBuilder: (ctx, index) => Dismissible(
+                child: Card(
+                  child: ListTile(
+                    leading: CircleAvatar(backgroundImage: NetworkImage(discountedProductsList[index].productImageUrl)),
+                    title: Text(discountedProductsList[index].productName),
+                    subtitle: Text(discountedProductsList[index].discount.toString().split(".")[0] + "%"),
                   ),
-                )),
-          )
+                ),
+                key: Key(index.toString()),
+                direction: DismissDirection.startToEnd,
+                background: Container(color: Colors.red),
+                onDismissed: null,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text('"أسحب لليسار لحذف العرض"'),
         ],
       ),
     );

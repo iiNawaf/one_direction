@@ -8,6 +8,7 @@ const _domain = "https://one-direction-app.000webhostapp.com/index.php/discount/
 
 class DiscountProvider extends ChangeNotifier {
   List<DiscountedProduct> discountedProductsList = [];
+  List<DiscountedProduct> currentCompanyDiscountedProducts = [];
   bool isLoading = false;
 
   Future<void> applyOffer(int offerId, List<int> productsList) async {
@@ -61,5 +62,14 @@ class DiscountProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  void loadCurrentCompanyDiscountedProducts(int companyId) {
+    currentCompanyDiscountedProducts.clear();
+    discountedProductsList.forEach((element) {
+      if (element.companyId == companyId) {
+        currentCompanyDiscountedProducts.add(element);
+      }
+    });
   }
 }
