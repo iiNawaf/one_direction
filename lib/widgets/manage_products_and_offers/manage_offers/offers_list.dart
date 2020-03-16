@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
-
+import 'package:project/models/offer_model.dart';
 
 class OffersList extends StatelessWidget {
+  final Offer offer;
+
+  OffersList({@required this.offer});
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: CircleAvatar(),
-        title: Text('50%'),
-        subtitle: Text('21-9-2019'+ ' إلى ' + '19-9-2019'),
+        leading: CircleAvatar(
+          backgroundImage: NetworkImage(offer.imageUrl),
+        ),
+        title: Text('${offer.discount.toString().split(".")[0]}%'),
+        subtitle: Text('${offer.startDate.toString().split(" ")[0]} الى ${offer.endDate.toString().split(" ")[0]}'),
         trailing: PopupMenuButton(
           onSelected: (value) {
-            if (value == 'edit'){
+            if (value == 'edit') {
               Navigator.pushNamed(context, '/editOffer');
-            }else{
-
-            }
+            } else {}
           },
-          itemBuilder: (BuildContext context) =>[
+          itemBuilder: (BuildContext context) => [
             const PopupMenuItem(
               value: 'edit',
               child: Text('تعديل'),
@@ -26,7 +30,6 @@ class OffersList extends StatelessWidget {
               child: Text('حذف'),
             ),
           ],
-        )
-    );
+        ));
   }
 }

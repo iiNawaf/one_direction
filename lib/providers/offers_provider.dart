@@ -52,12 +52,16 @@ class OffersProvider extends ChangeNotifier {
           noProducts: element['No_of_products'] == null ? 0 : int.parse(element['No_of_products']),
           startDate: DateTime.parse(element['StartDate']),
           endDate: DateTime.parse(element['endDate']),
-          imageUrl: element['OfferImages'],
+          imageUrl: element['Offerimages'],
           keyword: element['Keywords'],
         );
         companyOffers.add(newOffer);
       });
       notifyListeners();
     }
+  }
+
+  Offer getOfferById(int offerId) {
+    return companyOffers.firstWhere((element) => element.offerId == offerId);
   }
 }

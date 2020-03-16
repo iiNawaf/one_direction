@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:project/models/product_model.dart';
 
 class ProductsList extends StatelessWidget {
+  final Product product;
+
+  ProductsList({@required this.product});
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: CircleAvatar(),
-        title: Text('Product'),
-        subtitle: Text('15' + ' ريال'),
+        leading: CircleAvatar(backgroundImage: NetworkImage(product.imageUrl)),
+        title: Text('${product.arName} - ${product.enName}'),
+        subtitle: Text('${product.price}' + ' ريال'),
         trailing: PopupMenuButton(
           onSelected: (value) {
-            if (value == 'edit'){
+            if (value == 'edit') {
               Navigator.pushNamed(context, '/editProduct');
-            }else{
-
-            }
+            } else {}
           },
-          itemBuilder: (BuildContext context) =>[
+          itemBuilder: (BuildContext context) => [
             const PopupMenuItem(
               value: 'edit',
               child: Text('تعديل'),
@@ -27,7 +28,6 @@ class ProductsList extends StatelessWidget {
               child: Text('حذف'),
             ),
           ],
-        )
-    );
+        ));
   }
 }

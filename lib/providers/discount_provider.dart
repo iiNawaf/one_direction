@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:project/models/discounted_collection_model.dart';
 import 'package:project/models/discounted_product_model.dart';
 
 const _domain = "https://one-direction-app.000webhostapp.com/index.php/discount/";
@@ -9,6 +10,7 @@ const _domain = "https://one-direction-app.000webhostapp.com/index.php/discount/
 class DiscountProvider extends ChangeNotifier {
   List<DiscountedProduct> discountedProductsList = [];
   List<DiscountedProduct> currentCompanyDiscountedProducts = [];
+  List<DiscountedCollection> companyDiscountedCollection = [];
   bool isLoading = false;
 
   Future<void> applyOffer(int offerId, List<int> productsList) async {
@@ -71,5 +73,45 @@ class DiscountProvider extends ChangeNotifier {
         currentCompanyDiscountedProducts.add(element);
       }
     });
+    fillDiscountCollection();
+  }
+
+  void fillDiscountCollection() {
+    companyDiscountedCollection.clear();
+    List<int> offersIds = [];
+    List<DiscountedCollection> discountedCollection = [];
+    //save each offer id
+    currentCompanyDiscountedProducts.forEach((element) {
+      if (!offersIds.contains(element.offerId)) {
+        offersIds.add(element.offerId);
+      }
+    });
+    //fill collection with offers ids
+    offersIds.forEach((element) => discountedCollection.add(DiscountedCollection(offerId: element, products: [])));
+    //fill each collection products with discounted product with same offer id
+    discountedCollection.forEach(
+      (collectionItem) => currentCompanyDiscountedProducts.forEach((companyItem) {
+        if (companyItem.offerId == collectionItem.offerId) {
+          collectionItem.products.add(companyItem);
+        }
+      }),
+    );
+    //fill global list with collection list
+    discountedCollection.forEach((element) => companyDiscountedCollection.add(element));
+  }
+
+  Future<void> deleteDiscountedProducts(int offerId) async {
+    const url = _domain + "delete";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "offerId": offerId,
+      }),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']} | ${extractedResponse['details']}");
+    }
   }
 }

@@ -36,7 +36,9 @@ class _SubmitProductOfferState extends State<SubmitProductOffer> {
         setState(() {
           isSummiting = true;
         });
-        await Provider.of<DiscountProvider>(context, listen: false).applyOffer(widget.offerId, widget.productsList);
+        final discountProvider = Provider.of<DiscountProvider>(context, listen: false);
+        await discountProvider.applyOffer(widget.offerId, widget.productsList);
+        await discountProvider.loadDiscountedOffers();
         Navigator.of(context).pop();
       } catch (e) {
         setState(() {
