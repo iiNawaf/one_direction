@@ -114,4 +114,9 @@ class DiscountProvider extends ChangeNotifier {
       throw Exception("${extractedResponse['error']} | ${extractedResponse['details']}");
     }
   }
+
+  void removeDiscountedProductByOfferId(int offerId) {
+    discountedProductsList.removeWhere((element) => element.offerId == offerId);
+    notifyListeners();
+  }
 }

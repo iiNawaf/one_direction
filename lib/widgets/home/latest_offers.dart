@@ -19,22 +19,25 @@ class LatestOffers extends StatelessWidget {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Text(
-                  discountedProduct.discount.toString().split(".")[1] == "0"
-                      ? discountedProduct.discount.toString().split(".")[0] + "%"
-                      : discountedProduct.discount.toString() + "%",
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                CircleAvatar(
+                  backgroundColor: Colors.red,
+                  child: Text(
+                    discountedProduct.discount.toString().split(".")[1] == "0"
+                        ? discountedProduct.discount.toString().split(".")[0] + "%"
+                        : discountedProduct.discount.toString() + "%",
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
                 ),
               ],
             ),
             Row(
               children: <Widget>[
                 Text(
-                  discountedProduct.endDate.difference(DateTime.now()).inDays == 0
+                  discountedProduct.endDate.difference(DateTime.now()).inDays < 1
                       ? "انتهى العرض"
                       : "ينتهي بعد ${discountedProduct.endDate.difference(DateTime.now()).inDays} يوم/أيام",
                   style: TextStyle(
-                    color: discountedProduct.endDate.difference(DateTime.now()).inDays == 0 ? Colors.red : Colors.green,
+                    color: discountedProduct.endDate.difference(DateTime.now()).inDays < 1 ? Colors.red : Colors.green,
                   ),
                 ),
               ],

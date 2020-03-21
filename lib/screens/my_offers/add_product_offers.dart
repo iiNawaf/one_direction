@@ -35,7 +35,17 @@ class _AddProductOffersScreenState extends State<AddProductOffersScreen> {
               ? Center(child: Text("تأكد من اضافة منتجات اولاً"))
               : Column(
                   children: <Widget>[
-                    ChooseOfferPercent(offersList: offersProvider.companyOffers),
+                    Container(
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text("إختيار احد العروض", style: TextStyle(fontSize: 20)),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                          ),
+                          ChooseOfferPercent(offersList: offersProvider.companyOffers),
+                        ],
+                      ),
+                    ),
                     Container(
                       child: Text("إختيار المنتجات", style: TextStyle(fontSize: 20)),
                       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -63,9 +73,9 @@ class _AddProductOffersScreenState extends State<AddProductOffersScreen> {
                   ],
                 ),
       bottomNavigationBar: offersProvider.companyOffers.isEmpty
-          ? Container()
+          ? null
           : productstProvider.companyProducts.isEmpty
-              ? Container()
+              ? null
               : SubmitProductOffer(
                   offerId: ChooseOfferPercent.chosenOfferId,
                   productsList: productsIds,

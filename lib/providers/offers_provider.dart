@@ -64,4 +64,44 @@ class OffersProvider extends ChangeNotifier {
   Offer getOfferById(int offerId) {
     return companyOffers.firstWhere((element) => element.offerId == offerId);
   }
+
+  Future<void> editOffer(Offer newOffer) async {
+    const url = _domain + "edit";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "offerId": newOffer.offerId,
+        "newPercent": newOffer.discount,
+        "newImage": newOffer.imageUrl,
+        "newKeyword": newOffer.keyword,
+        "newStartDate": newOffer.startDate.toIso8601String(),
+        "newEndDate": newOffer.endDate.toIso8601String(),
+      }),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      final chosenOfferIndex = companyOffers.indexWhere((element) => element.offerId == newOffer.offerId);
+      companyOffers[chosenOfferIndex] = newOffer;
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteOffer(int offerId) async {
+    const url = _domain + "delete";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"offerId": offerId}),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      companyOffers.removeWhere((element) => element.offerId == offerId);
+      notifyListeners();
+    }
+  }
 }

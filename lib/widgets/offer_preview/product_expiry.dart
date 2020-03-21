@@ -9,7 +9,10 @@ class ProductExpiry extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        Text('ينتهي العرض يوم $date (باقي ${days.inDays} أيام)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey)),
+        Text(
+          days.inDays < 1 ? "انتهى العرض" : 'ينتهي العرض يوم $date (باقي ${days.inDays} أيام)',
+          style: TextStyle(fontWeight: FontWeight.bold, color: days.inDays < 1 ? Colors.red : Colors.grey),
+        ),
       ],
     );
   }

@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<AuthProvider>(
         builder: (context, authProvider, _) => GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusScopeNode currentFocus = FocusScope.of(context);
             if (!currentFocus.hasPrimaryFocus) {
               currentFocus.unfocus();
@@ -77,9 +77,9 @@ class MyApp extends StatelessWidget {
               '/upgradeToCompanyAccount': (context) => UpgradeToCompanyAccount(),
               '/myOffers': (context) => MyOffersScreen(),
               '/addProductOffers': (context) => AddProductOffersScreen(),
-              '/manage' : (context) => ManageProductAndOffers(),
-              '/editProduct' : (context) => EditProduct(),
-              '/editOffer' : (context) => EditOffer(),
+              '/manage': (context) => ManageProductAndOffers(),
+              '/editProduct': (context) => EditProduct(),
+              '/editOffer': (context) => EditOffer(),
             },
           ),
         ),

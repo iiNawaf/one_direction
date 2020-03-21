@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 
 class EditOfferKeywords extends StatelessWidget {
+  final TextEditingController controller;
+
+  EditOfferKeywords({@required this.controller});
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       maxLines: 4,
       cursorColor: Colors.grey,
       decoration: InputDecoration(

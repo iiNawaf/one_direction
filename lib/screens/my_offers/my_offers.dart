@@ -53,12 +53,14 @@ class _MyOffersScreenState extends State<MyOffersScreen> {
         backgroundColor: Colors.blue[200],
         title: Text('الخصومات الخاصة بي'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.pushNamed(context, '/addProductOffers');
-            },
-          )
+          isLoading
+              ? Container()
+              : IconButton(
+                  icon: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/addProductOffers');
+                  },
+                )
         ],
       ),
       body: isLoading

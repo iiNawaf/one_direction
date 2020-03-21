@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class EditOfferInitalDate extends StatefulWidget {
   static DateTime startDate;
   @override
@@ -13,6 +12,7 @@ class _EditOfferInitalDateState extends State<EditOfferInitalDate> {
     EditOfferInitalDate.startDate = null;
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return FlatButton(
