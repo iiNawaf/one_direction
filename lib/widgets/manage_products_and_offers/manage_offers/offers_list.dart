@@ -34,7 +34,7 @@ class OffersList extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(offer.imageUrl),
       ),
-      title: Text('${offer.discount.toString().split(".")[0]}% - عدد المنتجات (${offer.noProducts})'),
+      title: Text('${offer.discount.toString().split(".")[0]}%'),
       subtitle: Text('${offer.startDate.toString().split(" ")[0]} الى ${offer.endDate.toString().split(" ")[0]}'),
       trailing: PopupMenuButton(
         onSelected: (value) {

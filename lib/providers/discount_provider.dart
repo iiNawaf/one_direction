@@ -119,4 +119,9 @@ class DiscountProvider extends ChangeNotifier {
     discountedProductsList.removeWhere((element) => element.offerId == offerId);
     notifyListeners();
   }
+
+  void removeDiscountedProductByProductId(int productId) {
+    discountedProductsList.removeWhere((element) => element.productId == productId);
+    notifyListeners();
+  }
 }

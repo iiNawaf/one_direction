@@ -61,4 +61,43 @@ class ProductsProvider extends ChangeNotifier {
       }
     }
   }
+
+  Future<void> editProduct(Product newProduct) async {
+    const url = _domain + "edit";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "productId": newProduct.productId,
+        "newArName": newProduct.arName,
+        "newEnName": newProduct.enName,
+        "newImage": newProduct.imageUrl,
+        "newPrice": newProduct.price,
+      }),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      final chosenProductIndex = companyProducts.indexWhere((element) => element.productId == newProduct.productId);
+      companyProducts[chosenProductIndex] = newProduct;
+      notifyListeners();
+    }
+  }
+
+  Future<void> deleteProduct(int productId) async {
+    const url = _domain + "delete";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"productId": productId}),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      companyProducts.removeWhere((element) => element.productId == productId);
+      notifyListeners();
+    }
+  }
 }
