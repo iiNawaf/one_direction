@@ -9,7 +9,8 @@ class OffersSearch extends SearchDelegate<String>{
     "بيض",
     "منتج غريب",
     "وليد",
-    "سبوكة"
+    "سبوكة",
+    "شوق كلبة الكوارية"
   ];
 
   @override
@@ -38,36 +39,16 @@ class OffersSearch extends SearchDelegate<String>{
 
   @override
   Widget buildResults(BuildContext context) {
-    return GridView(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 13/20,
-        crossAxisCount: 2,
-      ),
-      children: <Widget>[
-        SearchResult()
-      ],
-    );
+    return Container();
 
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final listResult = list.where((element) => element.contains(query)).toList();
+    List listResult = list.where((element) => element.contains(query)).toList();
     return query.isEmpty
         ? Container()
-        : ListView.builder(
-        itemCount: listResult.length,
-        itemBuilder: (BuildContext context, int index){
-          return ListTile(
-            onTap: (){
-              showResults(context);
-            },
-            leading: CircleAvatar(),
-            title: Text('${listResult[index]}')
-          );
-        },
-
-    );
+        : SearchResult(listResult: listResult);
   }
 
 }
