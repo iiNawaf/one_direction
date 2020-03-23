@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/widgets/search_result/search_result_list.dart';
 
 
 class SearchResultScreen extends StatelessWidget {
@@ -12,7 +11,7 @@ class SearchResultScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-         SearchResultList(),
+
         ],
       ),
     );
