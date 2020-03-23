@@ -2,18 +2,12 @@ import 'package:flutter/material.dart';
 
 
 class SearchResult extends StatelessWidget {
-  List listResult;
+  final listResult;
   SearchResult({this.listResult});
+
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 13/20,
-        crossAxisCount: 2,
-      ),
-      itemCount: listResult.length,
-      itemBuilder: (BuildContext context, int index){
-        return Padding(
+    return Padding(
           padding: EdgeInsets.all(5.0),
           child: Container(
             padding: EdgeInsets.all(5.0),
@@ -44,7 +38,7 @@ class SearchResult extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                            '${listResult[index]}'.toString(),
+                            listResult.toString(),
                             style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)
                         ),
                       )
@@ -82,7 +76,5 @@ class SearchResult extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
   }
 }

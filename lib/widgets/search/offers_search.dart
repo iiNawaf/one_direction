@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:project/models/offer_model.dart';
+import 'package:project/providers/offers_provider.dart';
 import 'package:project/widgets/search/search_result.dart';
+import 'package:provider/provider.dart';
 
 
 class OffersSearch extends SearchDelegate<String>{
-  List<String> list = [
+  List list = [
     "جزمة",
     "قهوة",
     "بيض",
@@ -39,16 +42,25 @@ class OffersSearch extends SearchDelegate<String>{
 
   @override
   Widget buildResults(BuildContext context) {
-    return Container();
+    final listResult = list.where((element) => element.contains(query)).toList();
+    return query.isEmpty
+        ? Container()
+        : GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 13/20,
+          crossAxisCount: 2,
+        ),
+        itemCount: listResult.length,
+        itemBuilder: (BuildContext context, int index){
+          return SearchResult(listResult: listResult[index]);
+        }
+    );
 
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    List listResult = list.where((element) => element.contains(query)).toList();
-    return query.isEmpty
-        ? Container()
-        : SearchResult(listResult: listResult);
+    return buildResults(context);
   }
 
 }
