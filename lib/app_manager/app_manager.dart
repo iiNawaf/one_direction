@@ -32,54 +32,61 @@ class _AppManagerState extends State<AppManager> {
 
   @override
   Widget build(BuildContext context) {
+    final discountProvider = Provider.of<DiscountProvider>(context);
+    final restaurantList = discountProvider.getCategoryProducts("مطعم");
+    final coffeeShopsList = discountProvider.getCategoryProducts("كافيه");
+    final electronicShopsList = discountProvider.getCategoryProducts("إلكترونيات");
+    final retailsShopsList = discountProvider.getCategoryProducts("أسواق");
+
     return DefaultTabController(
-        length: 5,
-        child: Stack(
-          children: <Widget>[
-            Scaffold(
-              backgroundColor: Color(0xffe8f0f2),
-              drawer: AppDrawer(),
-              appBar: AppBar(
-                backgroundColor: Colors.blue[200],
-                title: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                          height: 30.0,
-                          padding: EdgeInsets.only(right: 10.0, left: 10.0),
-                          color: Colors.white,
-                          child: Form(
-                            child: Row(
-                              children: <Widget>[SearchBar(), Icon(Icons.search, color: Colors.black, size: 20)],
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
-                bottom: TabBar(
-                  labelPadding: EdgeInsets.all(0.0),
-                  indicatorColor: Colors.transparent,
-                  tabs: [
-                    Tab(child: Text('الرئيسية', style: style)),
-                    Tab(child: Text('مطاعم', style: style)),
-                    Tab(child: Text('كافيهات', style: style)),
-                    Tab(child: Text('إلكترونيات', style: style)),
-                    Tab(child: Text('أسواق', style: style)),
-                  ],
-                ),
+      length: 5,
+      child: Stack(
+        children: <Widget>[
+          Scaffold(
+            backgroundColor: Color(0xffe8f0f2),
+            drawer: AppDrawer(),
+            appBar: AppBar(
+              backgroundColor: Colors.blue[200],
+              title: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                        height: 30.0,
+                        padding: EdgeInsets.only(right: 10.0, left: 10.0),
+                        color: Colors.white,
+                        child: Form(
+                          child: Row(
+                            children: <Widget>[SearchBar(), Icon(Icons.search, color: Colors.black, size: 20)],
+                          ),
+                        )),
+                  ),
+                ],
               ),
-              body: TabBarView(
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  HomeScreen(),
-                  OffersListScreen(),
-                  OffersListScreen(),
-                  OffersListScreen(),
-                  OffersListScreen(),
+              bottom: TabBar(
+                labelPadding: EdgeInsets.all(0.0),
+                indicatorColor: Colors.transparent,
+                tabs: [
+                  Tab(child: Text('الرئيسية', style: style)),
+                  Tab(child: Text('مطاعم', style: style)),
+                  Tab(child: Text('كافيهات', style: style)),
+                  Tab(child: Text('إلكترونيات', style: style)),
+                  Tab(child: Text('أسواق', style: style)),
                 ],
               ),
             ),
-          ],
-        ));
+            body: TabBarView(
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                HomeScreen(),
+                OffersListScreen(list: restaurantList),
+                OffersListScreen(list: coffeeShopsList),
+                OffersListScreen(list: electronicShopsList),
+                OffersListScreen(list: retailsShopsList),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -124,4 +124,8 @@ class DiscountProvider extends ChangeNotifier {
     discountedProductsList.removeWhere((element) => element.productId == productId);
     notifyListeners();
   }
+
+  List<DiscountedProduct> getCategoryProducts(String category) {
+    return discountedProductsList.where((element) => element.category == category).toList();
+  }
 }

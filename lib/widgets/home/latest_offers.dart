@@ -30,7 +30,6 @@ class LatestOffers extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
                   ),
                 ),
-
                 Text(
                   discountedProduct.endDate.difference(DateTime.now()).inDays < 1
                       ? "انتهى العرض"
