@@ -13,6 +13,7 @@ class SearchResult extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: Colors.red,
@@ -20,10 +21,6 @@ class SearchResult extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
                 Text("انتهى العرض",
                   style: TextStyle(
                     color: Colors.red,

@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
             }
           },
           child: MaterialApp(
+            theme: ThemeData(fontFamily: 'Cairo'),
             debugShowCheckedModeBanner: false,
             localizationsDelegates: [
               GlobalMaterialLocalizations.delegate,

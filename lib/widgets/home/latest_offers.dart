@@ -12,26 +12,25 @@ class LatestOffers extends StatelessWidget {
       padding: EdgeInsets.all(5.0),
       child: Container(
         padding: EdgeInsets.all(5.0),
-        width: 150.0,
+        width: 200.0,
         decoration: BoxDecoration(color: Colors.white),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 CircleAvatar(
+                  radius: 15,
                   backgroundColor: Colors.red,
                   child: Text(
                     discountedProduct.discount.toString().split(".")[1] == "0"
                         ? discountedProduct.discount.toString().split(".")[0] + "%"
                         : discountedProduct.discount.toString() + "%",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
+
                 Text(
                   discountedProduct.endDate.difference(DateTime.now()).inDays < 1
                       ? "انتهى العرض"
@@ -42,7 +41,7 @@ class LatestOffers extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(flex: 3, child: Image.network(discountedProduct.productImageUrl, height: 50.0)),
+            Expanded(flex: 3, child: Image.network(discountedProduct.productImageUrl)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
