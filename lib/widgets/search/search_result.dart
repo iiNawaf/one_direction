@@ -16,24 +16,25 @@ class SearchResult extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Colors.red,
+                Expanded(
                   child: Text(
                     searchItem.discount.toString().split(".")[1] == "0"
                         ? searchItem.discount.toString().split(".")[0] + "%"
                         : searchItem.discount.toString() + "%",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red, fontSize: 15),
                   ),
                 ),
-                Text(
-                  searchItem.endDate.isBefore(DateTime.now())
-                      ? "انتهى العرض"
-                      : "ينتهي بعد ${searchItem.endDate.difference(searchItem.startDate).inDays} يوم/أيام",
-                  style: TextStyle(
-                    color: searchItem.endDate.isBefore(DateTime.now()) ? Colors.red : Colors.green,
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    searchItem.endDate.isBefore(DateTime.now())
+                        ? "انتهى العرض"
+                        : "ينتهي بعد ${searchItem.endDate.difference(searchItem.startDate).inDays} يوم/أيام",
+                    style: TextStyle(
+                      color: searchItem.endDate.isBefore(DateTime.now()) ? Colors.red : Colors.green,
+                      fontSize: 12, fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
               ],

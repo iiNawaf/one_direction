@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project/widgets/sign_up/individuals_sign_up/sign_up_confirm_password.dart';
+import 'package:project/widgets/sign_up/individuals_sign_up/sign_up_email.dart';
 import 'package:project/widgets/sign_up/individuals_sign_up/sign_up_password.dart';
 import 'package:project/widgets/sign_up/individuals_sign_up/sign_up_username.dart';
 import 'package:project/widgets/sign_up/individuals_sign_up/submit_sign_up.dart';
 
 class SignUpScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController passwordComfirmController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -38,6 +40,8 @@ class SignUpScreen extends StatelessWidget {
             key: formKey,
             child: Column(children: <Widget>[
               SignUpUsername(controller: usernameController),
+              Container(height: 20),
+              SignUpEmail(controller: emailController),
               Container(height: 20),
               SignUpPassword(controller: passwordController),
               Container(height: 20),

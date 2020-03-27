@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
           Center(
             child: Text('تسجيل الدخول', style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
           ),
-          SizedBox(height: 90),
+          SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: Form(
@@ -51,6 +51,16 @@ class LoginScreen extends StatelessWidget {
                           usernameController: usernameController,
                           passwordController: passwordController,
                         ),
+                      ),
+                      FlatButton(
+                          onPressed:()=> Navigator.pushNamed(context, '/forgotPassword'),
+                          child: Text('نسيت كلمة المرور؟',
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.blue[200],
+                                fontWeight: FontWeight.bold
+                            ),
+                          )
                       ),
                     ],
                   ),
