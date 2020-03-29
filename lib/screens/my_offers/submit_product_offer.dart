@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project/providers/discount_provider.dart';
+import 'package:project/widgets/my_offers/choose_offers_percent.dart';
 import 'package:provider/provider.dart';
 
 class SubmitProductOffer extends StatefulWidget {
-  final int offerId;
   final List<int> productsList;
 
-  SubmitProductOffer({@required this.offerId, @required this.productsList});
+  SubmitProductOffer({@required this.productsList});
 
   @override
   _SubmitProductOfferState createState() => _SubmitProductOfferState();
@@ -31,13 +31,14 @@ class _SubmitProductOfferState extends State<SubmitProductOffer> {
   }
 
   void _submit() async {
-    if (widget.offerId != null && widget.productsList.isNotEmpty) {
+    final offerId = ChooseOfferPercent.chosenOfferId;
+    if (offerId != null && widget.productsList.isNotEmpty) {
       try {
         setState(() {
           isSummiting = true;
         });
         final discountProvider = Provider.of<DiscountProvider>(context, listen: false);
-        await discountProvider.applyOffer(widget.offerId, widget.productsList);
+        await discountProvider.applyOffer(offerId, widget.productsList);
         await discountProvider.loadDiscountedOffers();
         Navigator.of(context).pop();
       } catch (e) {

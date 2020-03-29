@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       Text(
-                        'آخر العروض',
+                        'أحدث العروض',
                         style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                       )
                     ],

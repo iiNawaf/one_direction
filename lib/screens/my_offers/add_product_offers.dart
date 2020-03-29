@@ -77,7 +77,6 @@ class _AddProductOffersScreenState extends State<AddProductOffersScreen> {
           : productstProvider.companyProducts.isEmpty
               ? null
               : SubmitProductOffer(
-                  offerId: ChooseOfferPercent.chosenOfferId,
                   productsList: productsIds,
                 ),
     );

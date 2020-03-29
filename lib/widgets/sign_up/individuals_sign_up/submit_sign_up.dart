@@ -6,9 +6,16 @@ class SubmitSignUp extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final TextEditingController usernameController;
+  final TextEditingController emailController;
   final TextEditingController passwordController;
 
-  SubmitSignUp({@required this.formKey, @required this.scaffoldKey, @required this.usernameController, @required this.passwordController});
+  SubmitSignUp({
+    @required this.formKey,
+    @required this.scaffoldKey,
+    @required this.usernameController,
+    @required this.emailController,
+    @required this.passwordController,
+  });
 
   @override
   _SubmitSignUpState createState() => _SubmitSignUpState();
@@ -29,7 +36,11 @@ class _SubmitSignUpState extends State<SubmitSignUp> {
         setState(() {
           isLoading = true;
         });
-        await Provider.of<AuthProvider>(context, listen: false).signup(widget.usernameController.text, widget.passwordController.text);
+        await Provider.of<AuthProvider>(context, listen: false).signup(
+          widget.usernameController.text,
+          widget.emailController.text,
+          widget.passwordController.text,
+        );
         Navigator.of(context).pushReplacementNamed("/login");
         setState(() {
           isLoading = false;
@@ -43,6 +54,8 @@ class _SubmitSignUpState extends State<SubmitSignUp> {
           _showMessage("الحساب موجود مسبقاً");
         } else if (error == "USER_CREATION_FAILED") {
           _showMessage("حدث خطأ ما, لم نتمكن من إكمال طلبك");
+        } else if (error == "EMAIL_EXIST") {
+          _showMessage("الإيميل موجود مسبقاً");
         }
       }
     } else {

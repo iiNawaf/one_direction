@@ -61,6 +61,7 @@ class DiscountProvider extends ChangeNotifier {
         );
         discountedProductsList.add(newDiscountProduct);
       });
+      discountedProductsList = discountedProductsList.reversed.toList();
       isLoading = false;
       notifyListeners();
     }

@@ -47,7 +47,13 @@ class SignUpScreen extends StatelessWidget {
               Container(height: 20),
               SignUpConfirmPassword(controller: passwordComfirmController, passwordController: passwordController),
               Container(height: 20),
-              SubmitSignUp(formKey: formKey, scaffoldKey: scaffoldKey, usernameController: usernameController, passwordController: passwordController),
+              SubmitSignUp(
+                formKey: formKey,
+                scaffoldKey: scaffoldKey,
+                usernameController: usernameController,
+                emailController: emailController,
+                passwordController: passwordController,
+              ),
             ]),
           ),
         )

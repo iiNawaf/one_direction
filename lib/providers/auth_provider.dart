@@ -13,12 +13,13 @@ class AuthProvider extends ChangeNotifier {
   Company userComapny;
 
   //** SIGNUP **/
-  Future<void> signup(String username, String password) async {
+  Future<void> signup(String username, String email, String password) async {
     final url = domain + "signup";
     final response = await http.post(
       url,
       body: json.encode({
         "username": username,
+        "email": email,
         "password": password,
       }),
       headers: {
