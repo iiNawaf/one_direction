@@ -40,13 +40,15 @@ class LatestOffers extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(flex: 3, child: Image.network(discountedProduct.productImageUrl)),
+         Expanded(
+           child: Image.network(discountedProduct.productImageUrl),
+         ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: Text(discountedProduct.productName, style: TextStyle(fontSize: 12)),
+                    child: Text(discountedProduct.productName, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                   )
                 ],
               ),
@@ -60,6 +62,11 @@ class LatestOffers extends StatelessWidget {
                   Text(discountedProduct.priceAfter.toString() + 'ر.س.', style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
+            ),
+            Row(
+              children: <Widget>[
+                Text("شركة أبو علي للقات", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey)),
+              ],
             ),
             InkWell(
               onTap: () {

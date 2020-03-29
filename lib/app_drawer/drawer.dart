@@ -110,6 +110,15 @@ class AppDrawer extends StatelessWidget {
                         route == '/manage' ? Navigator.pop(context) : Navigator.pushNamed(context, '/manage');
                       },
                     ),
+          loggedinUser != null
+              ? Container()
+              : ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('تغيير كلمة المرور'),
+            onTap: () {
+              route == '/changePassword' ? Navigator.pop(context) : Navigator.pushNamed(context, '/changePassword');
+            },
+          ),
           Divider(),
           ListTile(
             leading: Icon(Icons.star),

@@ -7,6 +7,7 @@ import 'package:project/providers/offers_provider.dart';
 import 'package:project/providers/products_provider.dart';
 import 'package:project/screens/add_new_offer/add_new_offer.dart';
 import 'package:project/screens/add_new_product/add_new_product.dart';
+import 'package:project/screens/change_password/change_password.dart';
 import 'package:project/screens/login/forgot_password.dart';
 import 'package:project/screens/login/login.dart';
 import 'package:project/screens/manage_products_and_offers/manage_products_and_offers.dart';
@@ -82,7 +83,8 @@ class MyApp extends StatelessWidget {
               '/manage': (context) => ManageProductAndOffers(),
               '/editProduct': (context) => EditProduct(),
               '/editOffer': (context) => EditOffer(),
-              '/forgotPassword': (context) => ForgotPasswordScreen()
+              '/forgotPassword': (context) => ForgotPasswordScreen(),
+              '/changePassword': (context) => ChangePasswordScreen(),
             },
           ),
         ),
