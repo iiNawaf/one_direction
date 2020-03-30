@@ -71,7 +71,7 @@ class _SubmitChangePasswordState extends State<SubmitChangePassword> {
               child: FlatButton(
                 onPressed: _submit,
                 child: Center(
-                  child: Text('استعادة', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
+                  child: Text('تغيير', style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
