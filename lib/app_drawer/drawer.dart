@@ -34,7 +34,19 @@ class AppDrawer extends StatelessWidget {
                     ? Center(child: Text("مرحبا بك في One Direction"))
                     : authProvider.userComapny == null
                         ? Text("اهلاً بك ${loggedinUser.username}")
-                        : Text("اهلاً بك ${authProvider.userComapny.arName}")
+                        : Text("اهلاً بك ${authProvider.userComapny.arName}"),
+                Spacer(),
+                loggedinUser == null
+                    ? Container()
+                    : GestureDetector(
+                        child: Text(
+                          "تغيير كلمة المرور",
+                          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                        onTap: () {
+                          route == '/changePassword' ? Navigator.pop(context) : Navigator.pushNamed(context, '/changePassword');
+                        },
+                      ),
               ],
             ),
           ),
@@ -110,15 +122,6 @@ class AppDrawer extends StatelessWidget {
                         route == '/manage' ? Navigator.pop(context) : Navigator.pushNamed(context, '/manage');
                       },
                     ),
-          loggedinUser == null
-              ? Container()
-              : ListTile(
-                  leading: Icon(Icons.edit),
-                  title: Text('تغيير كلمة المرور'),
-                  onTap: () {
-                    route == '/changePassword' ? Navigator.pop(context) : Navigator.pushNamed(context, '/changePassword');
-                  },
-                ),
           Divider(),
           ListTile(
             leading: Icon(Icons.star),
