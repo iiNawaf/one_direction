@@ -6,7 +6,7 @@ import 'package:project/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-const domain = "https://one-direction-app.000webhostapp.com/index.php/auth/";
+const _domain = "https://one-direction-app.000webhostapp.com/index.php/auth/";
 
 class AuthProvider extends ChangeNotifier {
   User loggedinUser;
@@ -14,7 +14,7 @@ class AuthProvider extends ChangeNotifier {
 
   //** SIGNUP **/
   Future<void> signup(String username, String email, String password) async {
-    final url = domain + "signup";
+    final url = _domain + "signup";
     final response = await http.post(
       url,
       body: json.encode({
@@ -35,7 +35,7 @@ class AuthProvider extends ChangeNotifier {
 
   //** LOGIN **/
   Future<void> login(String username, String password) async {
-    final url = domain + "login";
+    final url = _domain + "login";
     final response = await http.post(
       url,
       body: json.encode({
@@ -148,7 +148,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> upgradeToCompany(int accountId, Company companyInfo) async {
-    final url = domain + "upgrade";
+    final url = _domain + "upgrade";
     final response = await http.post(
       url,
       body: json.encode({
@@ -167,6 +167,39 @@ class AuthProvider extends ChangeNotifier {
     final extractedResponse = json.decode(response.body);
     if (extractedResponse['error'] != null) {
       throw Exception(extractedResponse['error']);
+    }
+  }
+
+  //** PASSWORD RECOVER **/
+  Future<String> passwordRecover(String email) async {
+    const url = _domain + "forget_password_recover";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"email": email}),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      return extractedResponse['new_password'];
+    }
+  }
+
+  Future<void> setPassword(int userId, String oldPassword, String newPassword) async {
+    const url = _domain + "set_password";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "userId": userId,
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+      }),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
     }
   }
 }

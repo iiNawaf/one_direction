@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:project/widgets/change_password/current_password.dart';
 import 'package:project/widgets/change_password/new_password.dart';
 import 'package:project/widgets/change_password/submit_change_password.dart';
-import 'package:project/widgets/login/forgot_password/email.dart';
-import 'package:project/widgets/login/forgot_password/submit_forgot_password.dart';
-
 
 class ChangePasswordScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +31,13 @@ class ChangePasswordScreen extends StatelessWidget {
               child: Text('تغيير كلمة المرور', style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
             ),
             SizedBox(height: 50),
-            CurrentPassword(),
-            NewPassword(),
-            SubmitChangePassword(formKey: formKey)
+            CurrentPassword(controller: oldPasswordController),
+            NewPassword(controller: newPasswordController),
+            SubmitChangePassword(
+              formKey: formKey,
+              oldPasswordController: oldPasswordController,
+              newPasswordController: newPasswordController,
+            )
           ],
         ),
       ),

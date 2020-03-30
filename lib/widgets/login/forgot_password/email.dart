@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
-
 class Email extends StatelessWidget {
+  final TextEditingController controller;
+
+  Email({@required this.controller});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: TextFormField(
+        controller: controller,
         validator: (value) {
           if (value.isEmpty) {
             return "هذا الحقل مطلوب";
@@ -22,6 +26,7 @@ class Email extends StatelessWidget {
             borderSide: BorderSide(color: Colors.blue[200]),
           ),
         ),
+        keyboardType: TextInputType.emailAddress,
       ),
     );
   }

@@ -40,9 +40,9 @@ class LatestOffers extends StatelessWidget {
                 ),
               ],
             ),
-         Expanded(
-           child: Image.network(discountedProduct.productImageUrl),
-         ),
+            Expanded(
+              child: Image.network(discountedProduct.productImageUrl),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -65,7 +65,15 @@ class LatestOffers extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Text("شركة أبو علي للقات", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey)),
+                Container(
+                  width: 180,
+                  child: Text(
+                    discountedProduct.companyName,
+                    style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold, color: Colors.grey),
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: true,
+                  ),
+                ),
               ],
             ),
             InkWell(
