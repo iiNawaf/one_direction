@@ -20,28 +20,35 @@ class LatestOffers extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                CircleAvatar(
-                  radius: 15,
-                  backgroundColor: Colors.red,
-                  child: Text(
-                    discountedProduct.discount.toString().split(".")[1] == "0"
-                        ? discountedProduct.discount.toString().split(".")[0] + "%"
-                        : discountedProduct.discount.toString() + "%",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
+                Expanded(
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: Colors.red,
+                    child: Text(
+                      discountedProduct.discount.toString().split(".")[1] == "0"
+                          ? discountedProduct.discount.toString().split(".")[0] + "%"
+                          : discountedProduct.discount.toString() + "%",
+                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 13),
+                    ),
                   ),
                 ),
-                Text(
-                  discountedProduct.endDate.difference(DateTime.now()).inDays < 1
-                      ? "انتهى العرض"
-                      : "ينتهي بعد ${discountedProduct.endDate.difference(DateTime.now()).inDays} يوم/أيام",
-                  style: TextStyle(
-                    color: discountedProduct.endDate.difference(DateTime.now()).inDays < 1 ? Colors.red : Colors.green,
+                Expanded(
+                  flex: 4,
+                  child: Text(
+                    discountedProduct.endDate.difference(DateTime.now()).inDays < 1
+                        ? "انتهى العرض"
+                        : "ينتهي بعد ${discountedProduct.endDate.difference(DateTime.now()).inDays} يوم/أيام",
+                    style: TextStyle(
+                      color: discountedProduct.endDate.difference(DateTime.now()).inDays < 1 ? Colors.red : Colors.green, fontSize: 13,
+                    ),
                   ),
                 ),
               ],
             ),
             Expanded(
-              child: Image.network(discountedProduct.productImageUrl),
+              child: Container(
+                child: Image.network(discountedProduct.productImageUrl),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -65,11 +72,10 @@ class LatestOffers extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Container(
-                  width: 180,
+                Expanded(
                   child: Text(
                     discountedProduct.companyName,
-                    style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold, color: Colors.grey),
+                    style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold, color: Colors.grey),
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
                   ),

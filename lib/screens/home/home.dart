@@ -16,6 +16,12 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           HomeCarousel(),
           Padding(
+            padding: const EdgeInsets.only(right:8.0),
+            child: Text('الاكثر رواجا',
+                style: TextStyle(fontWeight: FontWeight.bold)
+            ),
+          ),
+          Padding(
             padding: EdgeInsets.all(0.0),
             child: Column(
               children: <Widget>[
@@ -39,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                     : discountProvider.discountedProductsList.isEmpty
                         ? Center(child: Text("لا توجد عروض حالياَ"))
                         : Container(
-                            height: 260.0,
+                            height: 300.0,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: discountProvider.discountedProductsList.length,

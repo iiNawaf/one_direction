@@ -37,6 +37,38 @@ class _AppManagerState extends State<AppManager> {
     final coffeeShopsList = discountProvider.getCategoryProducts("كافيه");
     final electronicShopsList = discountProvider.getCategoryProducts("إلكترونيات");
     final retailsShopsList = discountProvider.getCategoryProducts("أسواق");
+    final restaurantBanner = './assets/foodbanner.jpg';
+    final coffeeBanner = './assets/coffeebanner.jpg';
+    final phonesBanner = './assets/phonesbanner.jpeg';
+    final retailsBanner = './assets/marketbanner.jpg';
+    final List<String> restaurants = [
+      './assets/mac.png',
+      './assets/burgerKing.png',
+      './assets/herfy.png',
+      './assets/kfc.png',
+      './assets/pizzahut.png'
+    ];
+    final List<String> coffeeShops = [
+      './assets/barns.jpeg',
+      './assets/coffeeimg.jpg',
+      './assets/coffeelogo.jpg',
+      './assets/starbucks.png',
+      './assets/cafeday.jpg'
+    ];
+    final List<String> electorincsShops = [
+      './assets/apple.png',
+      './assets/android.png',
+      './assets/huawei.png',
+      './assets/window.png',
+      './assets/sony.png'
+    ];
+    final List<String> retailsShops = [
+      './assets/panda.png',
+      './assets/danube.jpg',
+      './assets/othaim.png',
+      './assets/carrefour.png',
+      './assets/raya.jpg'
+    ];
 
     return DefaultTabController(
       length: 5,
@@ -78,10 +110,10 @@ class _AppManagerState extends State<AppManager> {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 HomeScreen(),
-                OffersListScreen(list: restaurantList),
-                OffersListScreen(list: coffeeShopsList),
-                OffersListScreen(list: electronicShopsList),
-                OffersListScreen(list: retailsShopsList),
+                OffersListScreen(list: restaurantList, banner: restaurantBanner, categories: restaurants),
+                OffersListScreen(list: coffeeShopsList, banner: coffeeBanner, categories: coffeeShops),
+                OffersListScreen(list: electronicShopsList, banner: phonesBanner, categories: electorincsShops),
+                OffersListScreen(list: retailsShopsList, banner: retailsBanner, categories: retailsShops),
               ],
             ),
           ),

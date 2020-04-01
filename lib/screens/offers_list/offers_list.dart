@@ -6,29 +6,39 @@ import 'package:project/widgets/offers_list/category_offers_carousel.dart';
 
 class OffersListScreen extends StatelessWidget {
   final List<DiscountedProduct> list;
-
-  OffersListScreen({@required this.list});
+  final String banner;
+  final List<String> categories;
+  OffersListScreen({@required this.list,this.banner, this.categories});
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        CategoryOffersCarousel(),
-        Padding(padding: EdgeInsets.all(15.0), child: CategoryLatestCompanies()),
+        CategoryOffersCarousel(banner: banner),
+        Padding(
+          padding: const EdgeInsets.only(right:8.0),
+          child: Text('الاكثر رواجا',
+              style: TextStyle(fontWeight: FontWeight.bold)
+          ),
+        ),
+        Padding(
+            padding: EdgeInsets.all(15.0),
+            child: CategoryLatestCompanies(restaurant: categories)
+        ),
         list.isEmpty
             ? Center(child: Text("لا توجد منتجات"))
             : GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 3 / 4,
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                ),
-                itemCount: list.length,
-                itemBuilder: (ctx, index) => LatestOffers(discountedProduct: list[index]),
-              )
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 3 / 5,
+            crossAxisCount: 2,
+            crossAxisSpacing: 5,
+            mainAxisSpacing: 5,
+          ),
+          itemCount: list.length,
+          itemBuilder: (ctx, index) => LatestOffers(discountedProduct: list[index]),
+        )
       ],
     );
   }
