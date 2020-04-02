@@ -56,12 +56,14 @@ class _SubmitOfferState extends State<SubmitOffer> {
             companyId: comapnyId,
             noProducts: 0,
           );
-
           await Provider.of<OffersProvider>(context, listen: false).insert(newoffer);
           setState(() {
             isLoading = false;
           });
-          Navigator.of(context).pushReplacementNamed("/myOffers");
+          widget.discountController.clear();
+          widget.imageUrlController.clear();
+          widget.keywordController.clear();
+          _showMessage("تمت إضافة العرض بنجاح");
         } catch (e) {
           setState(() {
             isLoading = false;

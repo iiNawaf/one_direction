@@ -53,53 +53,95 @@ class _ManageProductAndOffersState extends State<ManageProductAndOffers> {
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator())
-          : ListView(
-              children: <Widget>[
-                offersList.isEmpty
-                    ? Container()
-                    : Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              'عروضي',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
+          : offersList.isEmpty && productsList.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text("لم تقم بإضافة اي عروض او منتجات حتى الآن!"),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          RaisedButton.icon(
+                            label: Text("إضافة عروض", style: TextStyle(color: Colors.white)),
+                            icon: Icon(Icons.add_circle, color: Colors.white),
+                            color: Colors.blue[300],
+                            onPressed: () => Navigator.of(context).pushNamed("/addNewOffer"),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            color: Colors.grey,
+                            width: 1,
+                            height: 25,
+                          ),
+                          RaisedButton.icon(
+                            label: Text("إضافة منتجات", style: TextStyle(color: Colors.white)),
+                            icon: Icon(Icons.add_circle, color: Colors.white),
+                            color: Colors.blue[300],
+                            onPressed: () => Navigator.of(context).pushNamed("/addNewProduct"),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              : ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'عروضي',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          )
+                        ],
                       ),
-                offersList.isEmpty
-                    ? Container()
-                    : ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: offersList.length,
-                        itemBuilder: (ctx, index) => OffersList(offer: offersList[index]),
+                    ),
+                    offersList.isEmpty
+                        ? Center(
+                            child: FlatButton.icon(
+                              onPressed: () => Navigator.of(context).pushNamed("/addNewOffer"),
+                              icon: Icon(Icons.add_circle),
+                              label: Text("إضافة عروض"),
+                            ),
+                          )
+                        : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: offersList.length,
+                            itemBuilder: (ctx, index) => OffersList(offer: offersList[index]),
+                          ),
+                    Divider(),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'منتجاتي',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          )
+                        ],
                       ),
-                Divider(),
-                productsList.isEmpty
-                    ? Container()
-                    : Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              'منتجاتي',
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ),
-                productsList.isEmpty
-                    ? Container()
-                    : ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: productsList.length,
-                        itemBuilder: (ctx, index) => ProductsList(product: productsList[index]),
-                      ),
-              ],
-            ),
+                    ),
+                    productsList.isEmpty
+                        ? Center(
+                            child: FlatButton.icon(
+                              onPressed: () => Navigator.of(context).pushNamed("/addNewProduct"),
+                              icon: Icon(Icons.add_circle),
+                              label: Text("إضافة منتجات"),
+                            ),
+                          )
+                        : ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: productsList.length,
+                            itemBuilder: (ctx, index) => ProductsList(product: productsList[index]),
+                          ),
+                  ],
+                ),
     );
   }
 }

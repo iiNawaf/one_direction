@@ -26,6 +26,8 @@ class OffersProvider extends ChangeNotifier {
     final extractedResponse = json.decode(response.body);
     if (extractedResponse['error'] != null) {
       throw Exception(extractedResponse['error']);
+    } else {
+      loadOffers(offer.companyId);
     }
   }
 

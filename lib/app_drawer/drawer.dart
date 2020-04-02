@@ -35,7 +35,7 @@ class AppDrawer extends StatelessWidget {
                     : authProvider.userComapny == null
                         ? Text("اهلاً بك ${loggedinUser.username}")
                         : Text("اهلاً بك ${authProvider.userComapny.arName}"),
-                Spacer(),
+                loggedinUser != null ? loggedinUser.accountType == AccountType.Individual ? Container() : Spacer() : Container(),
                 loggedinUser == null
                     ? Container()
                     : GestureDetector(
@@ -77,6 +77,18 @@ class AppDrawer extends StatelessWidget {
                         route == '/upgradeToCompanyAccount' ? Navigator.pop(context) : Navigator.pushNamed(context, '/upgradeToCompanyAccount');
                       },
                     ),
+          loggedinUser == null ? Container() : loggedinUser.accountType == AccountType.Company ? Divider() : Container(),
+          loggedinUser == null
+              ? Container()
+              : loggedinUser.accountType == AccountType.Individual
+                  ? Container()
+                  : ListTile(
+                      leading: Icon(Icons.edit),
+                      title: Text('إدارة'),
+                      onTap: () {
+                        route == '/manage' ? Navigator.pop(context) : Navigator.pushNamed(context, '/manage');
+                      },
+                    ),
           loggedinUser == null
               ? Container()
               : loggedinUser.accountType == AccountType.Individual
@@ -93,7 +105,7 @@ class AppDrawer extends StatelessWidget {
               : loggedinUser.accountType == AccountType.Individual
                   ? Container()
                   : ListTile(
-                      leading: Icon(Icons.add),
+                      leading: Icon(Icons.add_circle),
                       title: Text('إضافة عرض'),
                       onTap: () {
                         route == '/addNewOffer' ? Navigator.pop(context) : Navigator.pushNamed(context, '/addNewOffer');
@@ -104,22 +116,10 @@ class AppDrawer extends StatelessWidget {
               : loggedinUser.accountType == AccountType.Individual
                   ? Container()
                   : ListTile(
-                      leading: Icon(Icons.local_offer),
-                      title: Text('الخصومات'),
+                      leading: Icon(Icons.add_circle),
+                      title: Text('إضافة خصم'),
                       onTap: () {
                         route == '/myOffers' ? Navigator.pop(context) : Navigator.pushNamed(context, '/myOffers');
-                      },
-                    ),
-          loggedinUser == null ? Container() : Divider(),
-          loggedinUser == null
-              ? Container()
-              : loggedinUser.accountType == AccountType.Individual
-                  ? Container()
-                  : ListTile(
-                      leading: Icon(Icons.edit),
-                      title: Text('إدارة'),
-                      onTap: () {
-                        route == '/manage' ? Navigator.pop(context) : Navigator.pushNamed(context, '/manage');
                       },
                     ),
           Divider(),

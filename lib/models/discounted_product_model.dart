@@ -14,7 +14,6 @@ class DiscountedProduct {
   final String category;
   final DateTime startDate;
   final DateTime endDate;
-  final String banner;
 
   DiscountedProduct({
     @required this.productName,
@@ -30,6 +29,5 @@ class DiscountedProduct {
     @required this.productImageUrl,
     @required this.startDate,
     @required this.endDate,
-    @required this.banner,
   });
 }

@@ -8,7 +8,7 @@ class OffersListScreen extends StatelessWidget {
   final List<DiscountedProduct> list;
   final String banner;
   final List<String> categories;
-  OffersListScreen({@required this.list,this.banner, this.categories});
+  OffersListScreen({@required this.list, this.banner, this.categories});
 
   @override
   Widget build(BuildContext context) {
@@ -16,29 +16,32 @@ class OffersListScreen extends StatelessWidget {
       children: <Widget>[
         CategoryOffersCarousel(banner: banner),
         Padding(
-          padding: const EdgeInsets.only(right:8.0),
-          child: Text('الاكثر رواجا',
-              style: TextStyle(fontWeight: FontWeight.bold)
-          ),
+          padding: const EdgeInsets.only(right: 8.0),
+          child: Text('الاكثر رواجا', style: TextStyle(fontWeight: FontWeight.bold)),
         ),
-        Padding(
-            padding: EdgeInsets.all(15.0),
-            child: CategoryLatestCompanies(restaurant: categories)
-        ),
+        Padding(padding: EdgeInsets.all(15.0), child: CategoryLatestCompanies(restaurant: categories)),
         list.isEmpty
-            ? Center(child: Text("لا توجد منتجات"))
+            ? Center(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 30),
+                  child: Text(
+                    "لا توجد خصومات في الوقت الحالي",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
             : GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 3 / 5,
-            crossAxisCount: 2,
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-          ),
-          itemCount: list.length,
-          itemBuilder: (ctx, index) => LatestOffers(discountedProduct: list[index]),
-        )
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 3 / 5,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                ),
+                itemCount: list.length,
+                itemBuilder: (ctx, index) => LatestOffers(discountedProduct: list[index]),
+              )
       ],
     );
   }
