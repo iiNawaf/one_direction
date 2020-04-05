@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/widgets/rating/1_star_rating.dart';
-import 'package:project/widgets/rating/2_stars_rating.dart';
-import 'package:project/widgets/rating/3_stars_rating.dart';
-import 'package:project/widgets/rating/4_stars_rating.dart';
-import 'package:project/widgets/rating/5_stars_rating.dart';
 
 
 class RatingScreen extends StatefulWidget {
