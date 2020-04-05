@@ -14,6 +14,7 @@ import 'package:project/screens/manage_products_and_offers/manage_products_and_o
 import 'package:project/screens/my_offers/add_product_offers.dart';
 import 'package:project/screens/my_offers/my_offers.dart';
 import 'package:project/screens/offer_preview/offer_preview.dart';
+import 'package:project/screens/rating/rating.dart';
 import 'package:project/screens/sign_up/sign_up.dart';
 import 'package:project/screens/sign_up/upgrade_to_company_account.dart';
 import 'package:project/screens/splash_screen/splash_screen.dart';
@@ -85,6 +86,7 @@ class MyApp extends StatelessWidget {
               '/editOffer': (context) => EditOffer(),
               '/forgotPassword': (context) => ForgotPasswordScreen(),
               '/changePassword': (context) => ChangePasswordScreen(),
+              '/rating': (context) => RatingScreen(),
             },
           ),
         ),

@@ -126,7 +126,9 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.star),
             title: Text('قيمنا'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, '/rating');
+            },
           ),
           ListTile(
             leading: Icon(Icons.info_outline),
