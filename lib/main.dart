@@ -5,6 +5,7 @@ import 'package:project/providers/auth_provider.dart';
 import 'package:project/providers/discount_provider.dart';
 import 'package:project/providers/offers_provider.dart';
 import 'package:project/providers/products_provider.dart';
+import 'package:project/providers/suggestions_provider.dart';
 import 'package:project/screens/add_new_offer/add_new_offer.dart';
 import 'package:project/screens/add_new_product/add_new_product.dart';
 import 'package:project/screens/change_password/change_password.dart';
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: DiscountProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: SuggestionsProvider(),
         ),
       ],
       child: Consumer<AuthProvider>(

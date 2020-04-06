@@ -123,16 +123,18 @@ class AppDrawer extends StatelessWidget {
                       },
                     ),
           Divider(),
-          ListTile(
-            leading: Icon(Icons.star),
-            title: Text('قيمنا'),
-            onTap: () {
-              Navigator.pushNamed(context, '/rating');
-            },
-          ),
+          loggedinUser == null
+              ? Container()
+              : ListTile(
+                  leading: Icon(Icons.star),
+                  title: Text('قيمنا'),
+                  onTap: () {
+                    Navigator.pushNamed(context, '/rating');
+                  },
+                ),
           ListTile(
             leading: Icon(Icons.info_outline),
-            title: Text('اقتراح'),
+            title: Text('تقديم إقتراح'),
             onTap: () {
               Navigator.pushNamed(context, '/suggestions');
             },

@@ -4,8 +4,12 @@ import 'package:project/widgets/suggestion/suggestion_email.dart';
 import 'package:project/widgets/suggestion/suggestion_description.dart';
 import 'package:project/widgets/suggestion/suggestion_subject.dart';
 
-
 class SuggestionScreen extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,16 +20,24 @@ class SuggestionScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
-        child: ListView(
-          children: <Widget>[
-            SuggestionEmail(),
-            Container(height: 20),
-            SuggestionSubject(),
-            Container(height: 30),
-            SuggestionDescription(),
-            Container(height: 35),
-            SubmitSuggestion()
-          ],
+        child: Form(
+          key: formKey,
+          child: ListView(
+            children: <Widget>[
+              SuggestionEmail(controller: emailController),
+              Container(height: 20),
+              SuggestionSubject(controller: titleController),
+              Container(height: 30),
+              SuggestionDescription(controller: descriptionController),
+              Container(height: 35),
+              SubmitSuggestion(
+                formKey: formKey,
+                emailController: emailController,
+                titleController: titleController,
+                descriptionController: descriptionController,
+              ),
+            ],
+          ),
         ),
       ),
     );

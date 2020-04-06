@@ -130,6 +130,7 @@ class AuthProvider extends ChangeNotifier {
           phone: extractedData['phone'],
           category: extractedData['category'],
         );
+        await getUserRating(loggedinUser.userId);
         return true;
       } else {
         return false;
@@ -200,6 +201,42 @@ class AuthProvider extends ChangeNotifier {
     final extractedResponse = json.decode(response.body);
     if (extractedResponse['error'] != null) {
       throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    }
+  }
+
+  // --------------- RATING PROCESSES ------------------//
+  int userRating = 0;
+  Future<void> getUserRating(int userId) async {
+    const url = "https://one-direction-app.000webhostapp.com/index.php/rating/get-user-rating";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({"userId": userId}),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      final serverUserRating = int.parse(extractedResponse['user_rating']);
+      userRating = serverUserRating;
+    }
+  }
+
+  Future<void> setUserRating(int userId, int rating) async {
+    const url = "https://one-direction-app.000webhostapp.com/index.php/rating/set-user-rating";
+    final response = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode({
+        "userId": userId,
+        "userRating": rating,
+      }),
+    );
+    final extractedResponse = json.decode(response.body);
+    if (extractedResponse['error'] != null) {
+      throw Exception("${extractedResponse['error']}: ${extractedResponse['details']}");
+    } else {
+      userRating = rating;
     }
   }
 }
