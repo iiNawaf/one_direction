@@ -62,7 +62,7 @@ class SearchResult extends StatelessWidget {
             ),
             Row(
               children: <Widget>[
-                Text("شركة أبو علي للقات", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey)),
+                Expanded(child: Text('${searchItem.companyName}', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey))),
               ],
             ),
             InkWell(
