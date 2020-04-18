@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:project/admin_dashboard/admin_home.dart';
 import 'package:project/app_manager/app_manager.dart';
 import 'package:project/providers/auth_provider.dart';
 import 'package:project/providers/discount_provider.dart';
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
             locale: Locale("ar", "AE"),
             home: FutureBuilder(
               future: authProvider.autoLogin(),
-              builder: (ctx, result) => result.connectionState == ConnectionState.waiting ? SplashScreen() : AppManager(),
+              builder: (ctx, result) => result.connectionState == ConnectionState.waiting ? SplashScreen() : AdminHome(),
             ),
             routes: {
               '/home': (context) => AppManager(),

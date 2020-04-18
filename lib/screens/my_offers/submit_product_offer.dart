@@ -5,9 +5,7 @@ import 'package:provider/provider.dart';
 
 class SubmitProductOffer extends StatefulWidget {
   final List<int> productsList;
-
   SubmitProductOffer({@required this.productsList});
-
   @override
   _SubmitProductOfferState createState() => _SubmitProductOfferState();
 }
@@ -29,7 +27,6 @@ class _SubmitProductOfferState extends State<SubmitProductOffer> {
       ),
     );
   }
-
   void _submit() async {
     final offerId = ChooseOfferPercent.chosenOfferId;
     if (offerId != null && widget.productsList.isNotEmpty) {
@@ -52,7 +49,6 @@ class _SubmitProductOfferState extends State<SubmitProductOffer> {
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return isSummiting
