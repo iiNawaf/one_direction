@@ -29,8 +29,12 @@ class DiscountProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> loadDiscountedOffers() async {
-    const url = _domain + "load";
+  Future<void> loadDiscountedOffers({String mode}) async {
+    var url = _domain + "load/normal";
+    if (mode != null) {
+      url = _domain + "load/$mode";
+    }
+
     isLoading = true;
     final response = await http.get(
       url,

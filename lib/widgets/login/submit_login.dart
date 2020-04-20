@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/models/user_model.dart';
 import 'package:project/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,11 @@ class _SubmitLoginState extends State<SubmitLogin> {
           isLaoding = true;
         });
         await Provider.of<AuthProvider>(context, listen: false).login(widget.usernameController.text, widget.passwordController.text);
-        Navigator.pushReplacementNamed(context, "/home");
+        if (Provider.of<AuthProvider>(context, listen: false).loggedinUser.accountType == AccountType.Admin) {
+          Navigator.pushReplacementNamed(context, "/admin");
+        } else {
+          Navigator.pushReplacementNamed(context, "/home");
+        }
       } catch (e) {
         setState(() {
           isLaoding = false;

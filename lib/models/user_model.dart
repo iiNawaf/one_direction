@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 enum AccountType {
   Individual,
   Company,
+  Admin,
 }
 
 class User {
@@ -21,6 +22,8 @@ class User {
       return AccountType.Individual;
     } else if (typeInString == "company") {
       return AccountType.Company;
+    } else if (typeInString == "admin") {
+      return AccountType.Admin;
     } else {
       return null;
     }
@@ -31,6 +34,8 @@ class User {
       return "individual";
     } else if (accountType == AccountType.Company) {
       return "company";
+    } else if (accountType == AccountType.Admin) {
+      return "admin";
     } else {
       return null;
     }

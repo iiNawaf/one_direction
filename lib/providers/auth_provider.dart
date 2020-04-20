@@ -58,45 +58,46 @@ class AuthProvider extends ChangeNotifier {
         accountType: User.getAccountType(foundUser['Roles']),
       );
 
-      if (foundUser['Roles'] == "company") {
-        final foundCompany = extractedResponse['company'];
-        userComapny = Company(
-          companyId: int.parse(foundCompany['Companyid']),
-          arName: foundCompany['Name_ar'],
-          enName: foundCompany['Name_er'],
-          email: foundCompany['Email'],
-          logoUrl: foundCompany['Logo'],
-          url: foundCompany['url'],
-          phone: foundCompany['PhoneNo'],
-          category: foundCompany['Category'],
-        );
-      }
-
-      //Save logged in user data to the device, so no need to login each time openning the app
-      if (userComapny == null) {
-        final localUserData = json.encode({
-          "userId": loggedinUser.userId,
-          "username": loggedinUser.username,
-          "accountType": User.getAccountTypeString(loggedinUser.accountType),
-        });
-        final localStorage = await SharedPreferences.getInstance();
-        localStorage.setString("userData", localUserData);
-      } else {
-        final localUserData = json.encode({
-          "userId": loggedinUser.userId,
-          "username": loggedinUser.username,
-          "accountType": User.getAccountTypeString(loggedinUser.accountType),
-          "conpanyId": userComapny.companyId,
-          "arName": userComapny.arName,
-          "enName": userComapny.enName,
-          "email": userComapny.email,
-          "logoUrl": userComapny.logoUrl,
-          "url": userComapny.url,
-          "phone": userComapny.phone,
-          "category": userComapny.category,
-        });
-        final localStorage = await SharedPreferences.getInstance();
-        localStorage.setString("userDataWithCompany", localUserData);
+      if (loggedinUser.accountType != AccountType.Admin) {
+        if (foundUser['Roles'] == "company") {
+          final foundCompany = extractedResponse['company'];
+          userComapny = Company(
+            companyId: int.parse(foundCompany['Companyid']),
+            arName: foundCompany['Name_ar'],
+            enName: foundCompany['Name_er'],
+            email: foundCompany['Email'],
+            logoUrl: foundCompany['Logo'],
+            url: foundCompany['url'],
+            phone: foundCompany['PhoneNo'],
+            category: foundCompany['Category'],
+          );
+        }
+        //Save logged in user data to the device, so no need to login each time openning the app
+        if (userComapny == null) {
+          final localUserData = json.encode({
+            "userId": loggedinUser.userId,
+            "username": loggedinUser.username,
+            "accountType": User.getAccountTypeString(loggedinUser.accountType),
+          });
+          final localStorage = await SharedPreferences.getInstance();
+          localStorage.setString("userData", localUserData);
+        } else {
+          final localUserData = json.encode({
+            "userId": loggedinUser.userId,
+            "username": loggedinUser.username,
+            "accountType": User.getAccountTypeString(loggedinUser.accountType),
+            "conpanyId": userComapny.companyId,
+            "arName": userComapny.arName,
+            "enName": userComapny.enName,
+            "email": userComapny.email,
+            "logoUrl": userComapny.logoUrl,
+            "url": userComapny.url,
+            "phone": userComapny.phone,
+            "category": userComapny.category,
+          });
+          final localStorage = await SharedPreferences.getInstance();
+          localStorage.setString("userDataWithCompany", localUserData);
+        }
       }
     }
   }

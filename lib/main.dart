@@ -1,7 +1,9 @@
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:project/admin_dashboard/admin_home.dart';
 import 'package:project/app_manager/app_manager.dart';
+import 'package:project/models/user_model.dart';
 import 'package:project/providers/auth_provider.dart';
 import 'package:project/providers/discount_provider.dart';
 import 'package:project/providers/offers_provider.dart';
@@ -28,6 +30,7 @@ import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final AsyncMemoizer _authMemoizer = AsyncMemoizer();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -72,8 +75,12 @@ class MyApp extends StatelessWidget {
             ],
             locale: Locale("ar", "AE"),
             home: FutureBuilder(
-              future: authProvider.autoLogin(),
-              builder: (ctx, result) => result.connectionState == ConnectionState.waiting ? SplashScreen() : AdminHome(),
+              future: _authMemoizer.runOnce(() async => await authProvider.autoLogin()),
+              builder: (ctx, result) => result.connectionState == ConnectionState.waiting
+                  ? SplashScreen()
+                  : authProvider.loggedinUser == null
+                      ? AppManager()
+                      : authProvider.loggedinUser.accountType == AccountType.Admin ? AdminHome() : AppManager(),
             ),
             routes: {
               '/home': (context) => AppManager(),
@@ -92,6 +99,7 @@ class MyApp extends StatelessWidget {
               '/forgotPassword': (context) => ForgotPasswordScreen(),
               '/changePassword': (context) => ChangePasswordScreen(),
               '/rating': (context) => RatingScreen(),
+              '/admin': (context) => AdminHome(),
             },
           ),
         ),
